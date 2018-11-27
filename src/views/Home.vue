@@ -1,9 +1,9 @@
 <template>
-    <div class="vh-100" v-bind:class="{'center-parent': !true}">
+    <div class="vh-80" v-bind:class="{'center-parent': !smallDeviceHeight}">
         <navbar class="as-fs"></navbar>
-        <br>
         <div class="container">
             <div>
+                <br>
                 <div class="row">
                     <div class="col-md-10 col-lg-6 offset-md-1 offset-lg-3">
                         <div class="input-group text-center">
@@ -109,12 +109,13 @@ export default {
 .bg-t {
   background-color: transparent;
 }
-.vh-100 {
-  min-height: 100vh;
+.vh-80 {
+  min-height: 80vh;
 }
 .center-parent {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
 }
 .as-fs {
   flex-basis: 100%;
