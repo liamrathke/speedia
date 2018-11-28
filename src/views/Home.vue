@@ -7,7 +7,7 @@
                 <div class="row">
                     <div class="col-md-10 col-lg-6 offset-md-1 offset-lg-3">
                         <div class="input-group text-center">
-                            <input type="text" class="name-enter w-100 drop-shadow" v-model="name" placeholder="Username">
+                            <input type="text" class="name-enter w-100 drop-shadow" v-bind:class="{'name-enter-success': verifyName()}" v-model="name" placeholder="Username">
                         </div>
                         <br>
                     </div>
@@ -17,7 +17,7 @@
                                 <div v-on:click="changeCategory(category.name)">
                                     <div class="card drop-shadow b-0 br-0 unselected-category" v-bind:class="{'selected-category': selectedCategory === category.name}">
                                         <ul class="list-group list-group-flush text-center">
-                                            <li class="list-group-item bg-t"><i class="fa fs-5" v-bind:class="category.icon"></i></li>
+                                            <li class="list-group-item bg-t"><i class="fa fs-5 mt-3" v-bind:class="category.icon"></i></li>
                                             <li class="list-group-item pt-0 bg-t">
                                                 <h4 v-if="!smallDeviceWidth">{{category.name}}</h4>
                                                 <h6 v-else>{{category.name}}</h6>
@@ -32,7 +32,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-10 col-lg-6 offset-md-1 offset-lg-3 pb-3">
-                        <button type="button" class="btn btn-primary btn-lg w-100">Go!</button>
+                        <button type="button" class="btn btn-lg btn-success w-100 go-button drop-shadow" v-bind:class="{'go-button-success': verifyName()}" v-bind:disabled="!verifyName()">Go!</button>
                     </div>
                 </div>
             </div>
@@ -71,6 +71,9 @@ export default {
   methods: {
     changeCategory: function(newCategory) {
       this.selectedCategory = newCategory
+    },
+    verifyName: function() {
+      return (this.name.trim().length > 0)
     }
   }
 }
@@ -79,11 +82,14 @@ export default {
 <style scoped>
 .name-enter {
   border-width: 0;
-  border-left: 0.5em solid #343A40;
+  border-left: 0.5em solid #DE3F63;
   padding: 0.5em;
   font-size: 2em;
   color: var(--off-black);
   filter: drop-shadow(3px 6px 9px var(--off-black-80));
+}
+.name-enter-success {
+  border-left-color: #32BD70;
 }
 .name-enter::placeholder {
   filter: drop-shadow(3px 6px 9px var(--off-black-50));
@@ -96,6 +102,9 @@ export default {
 .selected-category {
   color: #FFFFFF;
   background-color: var(--off-black);
+}
+.selected-category > ul > li {
+  filter: drop-shadow(3px 6px 9px #000000);
 }
 .b-0, .list-group-item {
   border: 0;
@@ -120,6 +129,16 @@ export default {
 .as-fs {
   flex-basis: 100%;
   align-self: flex-start;
+}
+.go-button {
+  padding: 0.5em;
+  font-size: 2em;
+  border-radius: 0;
+  border-width: 0;
+  background: linear-gradient(45deg, rgb(241, 113, 167) 0%, rgb(222, 63, 99) 100%);
+}
+.go-button-success {
+  background: linear-gradient(45deg, rgb(93, 236, 188) 0%, rgb(50, 189, 112) 100%);
 }
 </style>
 
