@@ -7,7 +7,7 @@
                 <div class="row">
                     <div class="col-md-10 col-lg-6 offset-md-1 offset-lg-3">
                         <div class="input-group text-center">
-                            <input type="text" class="name-enter w-100 drop-shadow" v-bind:class="{'name-enter-success': verifyName()}" v-model="name" placeholder="Username">
+                            <input type="text" class="name-enter w-100 drop-shadow" v-bind:class="{'name-enter-success': verifyName()}" v-model="name" placeholder="Username" maxlength="30">
                         </div>
                         <br>
                     </div>
@@ -32,7 +32,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-10 col-lg-6 offset-md-1 offset-lg-3 pb-3">
-                        <button type="button" class="btn btn-lg btn-success w-100 go-button drop-shadow" v-bind:class="{'go-button-success': verifyName()}" v-bind:disabled="!verifyName()">Go!</button>
+                        <button type="button" class="btn btn-lg btn-success w-100 go-button drop-shadow" v-bind:class="{'go-button-success': verifyName()}" v-bind:disabled="!(verifyName() && queueButtonEnabled)" v-on:click="enterQueue()">Go!</button>
                     </div>
                 </div>
             </div>
@@ -48,8 +48,9 @@ export default {
   components: {Navbar},
   data: function() {
     return {
-      name: '',
+      name: 'Testing',
       selectedCategory: 'Grab Bag',
+      queueButtonEnabled: true,
       categories: [
         {name: 'Grab Bag', icon: 'fa-question-circle'},
         {name: 'History', icon: 'fa-monument'},
@@ -68,12 +69,32 @@ export default {
       return window.innerHeight < document.body.clientHeight
     }
   },
+  sockets: {},
   methods: {
     changeCategory: function(newCategory) {
       this.selectedCategory = newCategory
     },
     verifyName: function() {
       return (this.name.trim().length > 0)
+    },
+    enterQueue: function() {
+      if (this.verifyName) {
+        let queueParameters = {
+          name: this.name,
+          selectedCategory: this.selectedCategory
+        }
+        this.queueButtonEnabled = false
+        this.sockets.subscribe('enteredQueue', function(confirmation) {
+          if (confirmation) {
+            this.$router.push('Queue')
+          } else {
+            this.queueButtonEnabled = true
+            console.error('Failed to enter the queue!')
+          }
+          this.sockets.unsubscribe('enteredQueue')
+        })
+        this.$socket.emit('enterQueue', queueParameters)
+      }
     }
   }
 }
