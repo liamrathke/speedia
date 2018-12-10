@@ -6,6 +6,7 @@ let server = require('http').createServer(app)
 let io = require('socket.io')(server)
 
 let queue = []
+let games = {}
 
 server.listen(8079)
 
@@ -34,3 +35,19 @@ io.on('connection', socket => {
     io.to(socket.id).emit('exitedQueue', true)
   })
 })
+
+function queueHandler() {
+  if (queue.length > 2) {
+    let newGameUsers = queue.splice(0, 2)
+    createNewGame(newGameUsers)
+  }
+}
+
+function createNewGame(newGameUsers) {
+  let gameID = generateGameID(newGameUsers)
+  // games follow
+}
+
+function generateGameID(gameUsers) {
+  return gameUsers.sort().join('')
+}
