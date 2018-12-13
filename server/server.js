@@ -38,7 +38,7 @@ io.on('connection', socket => {
 
 function queueHandler() {
   if (queue.length > 2) {
-    let newGameUsers = queue.splice(0, 2)
+    let newGameUsers = queue.splice(0, 2).map(user => user.id)
     createNewGame(newGameUsers)
   }
 }
