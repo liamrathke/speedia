@@ -1,4 +1,6 @@
 console.log('Starting backend server...')
+console.log(process.version)
+console.log(process.argv)
 
 let express = require('express')
 let app = express()

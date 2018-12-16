@@ -1,5 +1,14 @@
 module.exports = {
   presets: [
-    '@vue/app'
+    '@vue/app',
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "entry",
+        "targets": {
+          "node": "11.4.0",
+        }
+      }
+    ]
   ]
 }
