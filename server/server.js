@@ -5,8 +5,11 @@ let app = express()
 let server = require('http').createServer(app)
 let io = require('socket.io')(server)
 
+let {Worker} = require('worker_threads')
+let join = require('path').join
+
 let queue = []
-let games = {}
+let gameThreads = {}
 
 server.listen(8079)
 
@@ -22,6 +25,7 @@ io.on('connection', socket => {
       queueParameters.id = socket.id
       queue.push(queueParameters)
       io.to(socket.id).emit('enteredQueue', true)
+      queueHandler()
     } else {
       console.log(`User ${socket.id} has failed to enter the queue`)
       io.to(socket.id).emit('enteredQueue', false)
@@ -36,18 +40,25 @@ io.on('connection', socket => {
   })
 })
 
+function generateGameID(gameUsers) {
+  return gameUsers.map(user => user.id).sort().join('')
+}
+
 function queueHandler() {
-  if (queue.length > 2) {
-    let newGameUsers = queue.splice(0, 2).map(user => user.id)
+  console.log('Calling queueHandler()')
+  if (queue.length > 1) {
+    let newGameUsers = queue.splice(0, 2)
     createNewGame(newGameUsers)
   }
 }
 
 function createNewGame(newGameUsers) {
   let gameID = generateGameID(newGameUsers)
-  // games follow
-}
-
-function generateGameID(gameUsers) {
-  return gameUsers.sort().join('')
+  let gameThreadFile = join(__dirname, './game/game-thread.js')
+  gameThreads[gameID] = new Worker(gameThreadFile, {
+    workerData: {
+      gameID: gameID,
+      gameUsers: newGameUsers
+    }
+  })
 }
