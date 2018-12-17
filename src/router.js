@@ -15,5 +15,9 @@ export default new Router({
     path: '/queue',
     name: 'Queue',
     component: () => import('@/views/Queue')
+  }, {
+    path: '/match',
+    name: 'Match',
+    component: () => import('@/views/Match')
   }]
 })

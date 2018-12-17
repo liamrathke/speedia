@@ -9,6 +9,12 @@ module.exports = class GameUser {
       this.category = 'GrabBag'
     }
   }
+  getInfo() {
+    return {
+      id: this.id,
+      name: this.name
+    }
+  }
   getCategory() {
     return this.category
   }

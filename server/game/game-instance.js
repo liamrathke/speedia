@@ -24,6 +24,9 @@ module.exports =  class GameInstance {
       this.gameUsers[userID].updatePath(this.currentRound, this.startEnd[0].article)
     })
   }
+  getMatchData() {
+    // 
+  }
   getCurrentRound() {
     return this.currentRound
   }

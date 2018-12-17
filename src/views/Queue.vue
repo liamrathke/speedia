@@ -35,6 +35,12 @@ export default {
     }
   },
   sockets: {},
+  mounted: function() {
+    this.sockets.subscribe('matchFound', function(data) {
+      this.$router.push('Match')
+      this.sockets.unsubscribe('matchFound')
+    })
+  },
   methods: {
     exitQueue: function() {
       this.exitButtonEnabled = false
