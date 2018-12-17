@@ -1,10 +1,8 @@
-export default class GameUser {
+module.exports = class GameUser {
   constructor(gameUser) {
-    this = {
-      id: gameUser.id,
-      name: gameUser.name,
-      path: []
-    }
+    this.id = gameUser.id
+    this.name = gameUser.name
+    this.path = []
     if (['History', 'News', 'Geography', 'Science', 'Culture'].indexOf(gameUser.selectedCategory) > -1) {
       this.category = gameUser.selectedCategory
     } else {

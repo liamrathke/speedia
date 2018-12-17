@@ -1,6 +1,7 @@
 {
   "watch": ["server"],
-  "ext": "js",
+  "ext": "js, mjs",
+  "verbose": true,
   "env": {
     "NODE_OPTIONS": "--experimental-worker"
   },

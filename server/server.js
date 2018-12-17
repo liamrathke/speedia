@@ -21,7 +21,7 @@ io.on('connection', socket => {
     console.log(`User ${socket.id} disconnected`)
   })
   socket.on('enterQueue', queueParameters => {
-    console.log(queueParameters)
+    // console.log(queueParameters)
     if (queueParameters.name && queueParameters.selectedCategory) {
       console.log(`User ${socket.id} has entered the queue as ${queueParameters.name}`)
       queueParameters.id = socket.id
@@ -47,7 +47,6 @@ function generateGameID(gameUsers) {
 }
 
 function queueHandler() {
-  console.log('Calling queueHandler()')
   if (queue.length > 1) {
     let newGameUsers = queue.splice(0, 2)
     createNewGame(newGameUsers)
@@ -55,6 +54,7 @@ function queueHandler() {
 }
 
 function createNewGame(newGameUsers) {
+  console.log('Creating new game')
   let gameID = generateGameID(newGameUsers)
   let gameThreadFile = join(__dirname, './game/game-thread.js')
   gameThreads[gameID] = new Worker(gameThreadFile, {
@@ -63,4 +63,5 @@ function createNewGame(newGameUsers) {
       gameUsers: newGameUsers
     }
   })
+  console.log('New game created!')
 }

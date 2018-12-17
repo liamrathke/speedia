@@ -1,10 +1,10 @@
-import GrabBag from './grab-bag'
-import History from './history'
-import News from './news'
-import Geography from './geography'
-import Science from './science'
-import Culture from './culture'
+let GrabBag =  require('./grab-bag')
+let History = require( './history')
+let News = require( './news')
+let Geography = require( './geography')
+let Science = require( './science')
+let Culture = require( './culture')
 
-export {
+module.exports = {
   GrabBag, History, News, Geography, Science, Culture
 }

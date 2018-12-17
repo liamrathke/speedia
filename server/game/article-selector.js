@@ -1,6 +1,6 @@
-import * as Articles from '../articles'
+let Articles = require('../articles/index')
 
-export default class ArticleSelector {
+module.exports =  class ArticleSelector {
   getRandomArticle(category) {
     let categoryArticles = Articles[category]
     return categoryArticles[Math.floor(Math.random() * categoryArticles.length)]
