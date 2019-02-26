@@ -1,6 +1,4 @@
 console.log('Starting backend server...')
-console.log(process.version)
-console.log(process.argv)
 
 let express = require('express')
 let app = express()
@@ -21,7 +19,6 @@ io.on('connection', socket => {
     console.log(`User ${socket.id} disconnected`)
   })
   socket.on('enterQueue', queueParameters => {
-    // console.log(queueParameters)
     if (queueParameters.name && queueParameters.selectedCategory) {
       console.log(`User ${socket.id} has entered the queue as ${queueParameters.name}`)
       queueParameters.id = socket.id
@@ -57,11 +54,13 @@ function createNewGame(newGameUsers) {
   console.log('Creating new game')
   let gameID = generateGameID(newGameUsers)
   let gameThreadFile = join(__dirname, './game/game-thread.js')
-  gameThreads[gameID] = new Worker(gameThreadFile, {
+  let worker = new Worker(gameThreadFile, {
     workerData: {
       gameID: gameID,
       gameUsers: newGameUsers
     }
   })
+  worker.on('message')
+  gameThreads[gameID] = worker
   console.log('New game created!')
 }

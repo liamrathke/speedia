@@ -25,7 +25,7 @@ module.exports =  class GameInstance {
     })
   }
   getMatchData() {
-    // 
+    
   }
   getCurrentRound() {
     return this.currentRound
