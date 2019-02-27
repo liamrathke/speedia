@@ -10,11 +10,10 @@ module.exports =  class GameInstance {
     this.currentRound = 0
     this.startEnd = []
     gameUsers.forEach(user => {
-      let newUser = new GameUser(user)
-      this.gameUsers[user.id.toString()] = newUser
+      this.gameUsers[user.getInfo().id.toString()] = user
       this.startEnd.push({
-        category: newUser.getCategory(), 
-        article: articleSelector.getRandomArticle(newUser.getCategory())
+        category: user.getCategory(), 
+        article: articleSelector.getRandomArticle(user.getCategory())
       })
     })
     while (this.startEnd[0].article === this.startEnd[1].article) {

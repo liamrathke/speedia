@@ -1,13 +1,17 @@
+let CategoryInfo = require('./category-info')
+
 module.exports = class GameUser {
   constructor(gameUser) {
     this.id = gameUser.id
     this.name = gameUser.name
+    this.gameID = false
     this.path = []
     if (['History', 'News', 'Geography', 'Science', 'Culture'].indexOf(gameUser.selectedCategory) > -1) {
       this.category = gameUser.selectedCategory
     } else {
       this.category = 'GrabBag'
     }
+    this.categoryInfo = CategoryInfo[this.category]
   }
   getInfo() {
     return {
@@ -17,6 +21,12 @@ module.exports = class GameUser {
   }
   getCategory() {
     return this.category
+  }
+  getCategoryInfo() {
+    return {
+      category: this.category,
+      info: this.categoryInfo
+    }
   }
   updatePath(index, article) {
     this.path.splice(index, 1, article)

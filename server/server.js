@@ -11,6 +11,8 @@ let join = require('path').join
 let queue = []
 let gameThreads = {}
 
+let GameUser = require('./game/game-user')
+
 server.listen(8079)
 
 io.on('connection', socket => {
@@ -22,8 +24,9 @@ io.on('connection', socket => {
     if (queueParameters.name && queueParameters.selectedCategory) {
       console.log(`User ${socket.id} has entered the queue as ${queueParameters.name}`)
       queueParameters.id = socket.id
-      queue.push(queueParameters)
-      io.to(socket.id).emit('enteredQueue', true)
+      let user = new GameUser(queueParameters)
+      queue.push(user)
+      io.to(socket.id).emit('enteredQueue', user.getCategoryInfo())
       queueHandler()
     } else {
       console.log(`User ${socket.id} has failed to enter the queue`)
