@@ -35,7 +35,7 @@ io.on('connection', socket => {
   })
   socket.on('exitQueue', () => {
     queue = queue.filter(user => {
-      return user.id === socket.id
+      return user.id !== socket.id
     })
     console.log(`User ${socket.id} has been removed from the queue`)
     io.to(socket.id).emit('exitedQueue', true)
