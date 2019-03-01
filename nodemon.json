@@ -5,5 +5,5 @@
   "env": {
     "NODE_OPTIONS": "--experimental-worker"
   },
-  "exec": "babel-node server/server.js"
+  "exec": "node ./server/server.js"
 }

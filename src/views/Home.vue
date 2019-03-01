@@ -79,9 +79,9 @@ export default {
           selectedCategory: this.selectedCategory
         }
         this.queueButtonEnabled = false
-        this.sockets.subscribe('enteredQueue', function(confirmation) {
-          if (confirmation) {
-            this.$router.push('Queue')
+        this.sockets.subscribe('enteredQueue', function(selectedCategory) {
+          if (selectedCategory.name) {
+            this.$router.push({name: 'Queue', params: {category: selectedCategory}})
           } else {
             this.queueButtonEnabled = true
             console.error('Failed to enter the queue!')

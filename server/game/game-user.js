@@ -24,8 +24,8 @@ module.exports = class GameUser {
   }
   getCategoryInfo() {
     return {
-      category: this.category,
-      info: this.categoryInfo
+      name: this.category,
+      icon: this.categoryInfo.icon
     }
   }
   updatePath(index, article) {

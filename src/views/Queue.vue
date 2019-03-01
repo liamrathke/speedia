@@ -25,12 +25,20 @@
 <script>
 export default {
   name: 'Queue',
+  props: {
+    category: {
+      type: Object,
+      required: false,
+      default: function() {
+        return {
+          icon: 'fa-question-circle',
+          name: 'Grab Bag'
+        }
+      }
+    }
+  },
   data: function() {
     return {
-      category: {
-        icon: 'fa-question-circle',
-        name: 'Grab Bag'
-      },
       exitButtonEnabled: true
     }
   },
