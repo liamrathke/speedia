@@ -63,7 +63,7 @@ function createNewGame(newGameUsers) {
       gameUsers: newGameUsers
     }
   })
-  worker.on('message')
+  // worker.on('message')
   gameThreads[gameID] = worker
   console.log('New game created!')
 }

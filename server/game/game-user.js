@@ -23,10 +23,7 @@ module.exports = class GameUser {
     return this.category
   }
   getCategoryInfo() {
-    return {
-      name: this.category,
-      icon: this.categoryInfo.icon
-    }
+    return this.categoryInfo
   }
   updatePath(index, article) {
     this.path.splice(index, 1, article)
