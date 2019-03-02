@@ -8,6 +8,8 @@ module.exports = class GameUser {
     this.path = []
     if (['History', 'News', 'Geography', 'Science', 'Culture'].indexOf(gameUser.selectedCategory) > -1) {
       this.category = gameUser.selectedCategory
+    } else if (gameUser.category) {
+      this.category = gameUser.category
     } else {
       this.category = 'GrabBag'
     }

@@ -1,4 +1,3 @@
-let GameUser = require('./game-user')
 let ArticleSelector = require('./article-selector')
 
 let articleSelector = new ArticleSelector()
@@ -6,9 +5,10 @@ let articleSelector = new ArticleSelector()
 module.exports =  class GameInstance {
   constructor(gameID, gameUsers) {
     this.gameID = gameID
-    this.gameUsers = {}
+    this.gameUsers = gameUsers
     this.currentRound = 0
     this.startEnd = []
+    console.log(typeof gameUsers[0], gameUsers[0])
     gameUsers.forEach(user => {
       this.gameUsers[user.getInfo().id.toString()] = user
       this.startEnd.push({
