@@ -21,6 +21,12 @@ module.exports = class GameUser {
       name: this.name
     }
   }
+  getExposableInfo() {
+    return {
+      name: this.name,
+      categoryInfo: this.getCategoryInfo()
+    }
+  }
   getCategory() {
     return this.category
   }

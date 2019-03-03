@@ -6,7 +6,7 @@ let server = require('http').createServer(app)
 let io = require('socket.io')(server)
 
 let {Worker} = require('worker_threads')
-let join = require('path').join
+let {join} = require('path')
 
 let queue = []
 let gameThreads = {}
@@ -63,7 +63,28 @@ function createNewGame(newGameUsers) {
       gameUsers: newGameUsers
     }
   })
-  // worker.on('message')
+  worker.on('message', message => {
+    workerMessageHandler(message)
+  })
   gameThreads[gameID] = worker
   console.log('New game created!')
+}
+
+function workerMessageHandler(message) {
+  switch (message.target) {
+    case 'all': {
+      message.gameUserIDs.forEach(userID => {
+        io.to(userID).emit(message.name, message.data)
+      })
+      console.log('Sending message to all users')
+      break
+    }
+    case 'individuals': {
+      console.log('Sending message to each user individually')
+      break
+    }
+    default: {
+      console.log('Keeping message internal')
+    }
+  }
 }

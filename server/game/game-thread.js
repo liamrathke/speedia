@@ -1,5 +1,7 @@
 let {parentPort, workerData} = require('worker_threads')
 
+let WorkerMessage = require('./worker-message')
+
 let GameUser = require('./game-user')
 let GameInstance = require('./game-instance')
 
@@ -7,4 +9,7 @@ let GameInstance = require('./game-instance')
 let gameUsers = workerData.gameUsers.map(user => new GameUser(user))
 
 let gameInstance = new GameInstance(workerData.gameID, gameUsers)
-console.log(gameInstance.currentRound)
+WorkerMessage.prototype.gameUserIDs = JSON.parse(JSON.stringify(gameInstance.getGameUserIDs()))
+
+parentPort.postMessage(new WorkerMessage('all', 'matchFound', gameInstance.getMatchInfo()).convert())
+console.log(gameInstance)

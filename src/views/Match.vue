@@ -16,6 +16,7 @@ export default {
   },
   sockets: {},
   mounted: function() {
+    console.log('Match found!')
     this.sockets.subscribe('newRound', function(data) {
       this.$router.push('/')
       this.sockets.unsubscribe('newRound')
