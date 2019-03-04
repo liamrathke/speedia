@@ -4,9 +4,8 @@
     </div>
 </template>
 
-<style>
-:root {
-  --off-black: #343A40;
-  --off-black-50: #343A4050;
-}
-</style>
+<script>
+import './assets/styles.css'
+
+export default {}
+</script>
