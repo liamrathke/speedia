@@ -25,7 +25,7 @@ module.exports =  class GameInstance {
   getGameUserIDs() {
     return Object.keys(this.gameUsers)
   }
-  getMatchInfo() {
+  getGameInfo() {
     return {
       exposedGameUsers: this.getGameUserIDs().map(userID => this.gameUsers[userID].getExposableInfo()),
       startEnd: this.startEnd
