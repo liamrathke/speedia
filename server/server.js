@@ -8,49 +8,36 @@ let io = require('socket.io')(server)
 let {Worker} = require('worker_threads')
 let {join} = require('path')
 
-let queue = []
 let gameThreads = {}
 
-let GameUser = require('./game/game-user')
+let QueueInstance = require('./queue/queue-instance')
 
 server.listen(8079)
 
+let queueInstance = new QueueInstance()
+
 io.on('connection', socket => {
-  console.log(`User ${socket.id} connected`)
+  console.log(`User ${socket.id} has connected`)
   socket.on('disconnect', () => {
-    console.log(`User ${socket.id} disconnected`)
+    queueInstance.removeUserFromQueue(socket.id)
+    console.log(`User ${socket.id} has disconnected`)
   })
-  socket.on('enterQueue', queueParameters => {
-    if (queueParameters.name && queueParameters.selectedCategory) {
-      console.log(`User ${socket.id} has entered the queue as ${queueParameters.name}`)
-      queueParameters.id = socket.id
-      let user = new GameUser(queueParameters)
-      queue.push(user)
-      io.to(socket.id).emit('enteredQueue', user.getCategoryInfo())
-      queueHandler()
-    } else {
-      console.log(`User ${socket.id} has failed to enter the queue`)
-      io.to(socket.id).emit('enteredQueue', false)
-    }
+  socket.on('enterQueue', userQueueParameters => {
+    userQueueParameters.id = socket.id
+    let userCategoryInfo = queueInstance.addUserToQueue(userQueueParameters, createNewGame)
+    io.to(socket.id).emit('enteredQueue', userCategoryInfo)
+    console.log(`Added user ${socket.id} to queue`)
   })
   socket.on('exitQueue', () => {
-    queue = queue.filter(user => {
-      return user.id !== socket.id
-    })
-    console.log(`User ${socket.id} has been removed from the queue`)
+    queueInstance.removeUserFromQueue(socket.id)
     io.to(socket.id).emit('exitedQueue', true)
+    console.log(`Removed user ${socket.id} from queue`)
+    console.log(`Current queue length: ${queueInstance.getQueueLength()}`)
   })
 })
 
 function generateGameID(gameUsers) {
   return gameUsers.map(user => user.id).sort().join('')
-}
-
-function queueHandler() {
-  if (queue.length > 1) {
-    let newGameUsers = queue.splice(0, 2)
-    createNewGame(newGameUsers)
-  }
 }
 
 function createNewGame(newGameUsers) {
