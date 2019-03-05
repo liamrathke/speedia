@@ -18,8 +18,8 @@ export default new Router({
     component: () => import('@/views/Queue'),
     props: true
   }, {
-    path: '/match',
-    name: 'Match',
-    component: () => import('@/views/Match')
+    path: '/gameFound',
+    name: 'GameFound',
+    component: () => import('@/views/game/GameFound')
   }]
 })

@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: 'Match',
+  name: 'GameFound',
   data: function() {
     return {
       test: true
@@ -16,7 +16,7 @@ export default {
   },
   sockets: {},
   mounted: function() {
-    console.log('Match found!')
+    console.log('Game found!')
     this.sockets.subscribe('newRound', function(data) {
       this.$router.push('/')
       this.sockets.unsubscribe('newRound')

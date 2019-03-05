@@ -44,9 +44,9 @@ export default {
   },
   sockets: {},
   mounted: function() {
-    this.sockets.subscribe('matchFound', function(data) {
-      this.$router.push('Match')
-      this.sockets.unsubscribe('matchFound')
+    this.sockets.subscribe('foundGame', function(data) {
+      this.$router.push('GameFound')
+      this.sockets.unsubscribe('foundGame')
     })
   },
   methods: {
