@@ -11,9 +11,9 @@
                 </div>
                 <div class="center-card card drop-shadow b-0 br-0">
                     <ul class="list-group list-group-flush text-center">
-                        <li class="list-group-item b-0 bg-t"><i class="fa fs-10 mt-3 drop-shadow" v-bind:class="category.icon"></i></li>
+                        <li class="list-group-item b-0 bg-t"><i class="fa fs-10 mt-3 drop-shadow" v-bind:class="categoryInfo.icon"></i></li>
                         <li class="list-group-item b-0 pt-0 bg-t">
-                            <h1 class="drop-shadow">{{category.name}}</h1>
+                            <h1 class="drop-shadow">{{categoryInfo.name}}</h1>
                         </li>
                     </ul>
                 </div>
@@ -26,7 +26,7 @@
 export default {
   name: 'Queue',
   props: {
-    category: {
+    categoryInfo: {
       type: Object,
       required: false,
       default: function() {
@@ -42,22 +42,8 @@ export default {
       exitButtonEnabled: true
     }
   },
-  sockets: {},
-  mounted: function() {
-    this.sockets.subscribe('foundGame', function(data) {
-      this.$router.push('GameFound')
-      this.sockets.unsubscribe('foundGame')
-    })
-  },
   methods: {
     exitQueue: function() {
-      this.exitButtonEnabled = false
-      this.sockets.subscribe('exitedQueue', function(confirmation) {
-        if (confirmation) {
-          this.$router.push('/')
-        }
-        this.sockets.unsubscribe('exitedQueue')
-      })
       this.$socket.emit('exitQueue')
     }
   }

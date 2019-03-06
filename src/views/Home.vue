@@ -64,7 +64,6 @@ export default {
       return window.innerHeight < document.body.clientHeight
     }
   },
-  sockets: {},
   methods: {
     changeCategory: function(newCategory) {
       this.selectedCategory = newCategory
@@ -74,21 +73,7 @@ export default {
     },
     enterQueue: function() {
       if (this.verifyName) {
-        let queueParameters = {
-          name: this.name,
-          selectedCategory: this.selectedCategory
-        }
-        this.queueButtonEnabled = false
-        this.sockets.subscribe('enteredQueue', function(selectedCategory) {
-          if (selectedCategory.name) {
-            this.$router.push({name: 'Queue', params: {category: selectedCategory}})
-          } else {
-            this.queueButtonEnabled = true
-            console.error('Failed to enter the queue!')
-          }
-          this.sockets.unsubscribe('enteredQueue')
-        })
-        this.$socket.emit('enterQueue', queueParameters)
+        this.$socket.emit('enterQueue', {name: this.name, selectedCategory: this.selectedCategory})
       }
     }
   }
