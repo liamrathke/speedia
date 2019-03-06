@@ -14,8 +14,8 @@
                 <div class="col-sm-12 col-md-2 p-0">
                     <div class="text-center ptb-1 progress-bar progress-bar-striped progress-bar-animated red-bg">
                         <div class="post-n2">
-                            <div class="post-2">
-                                <h2 class="m-0">VS</h2>
+                            <div class="post-2 drop-shadow">
+                                <h2 class="m-0 drop-shadow-heavy">VS</h2>
                             </div>
                         </div>
                     </div>
