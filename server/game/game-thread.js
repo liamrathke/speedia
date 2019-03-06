@@ -12,4 +12,3 @@ let gameInstance = new GameInstance(workerData.gameID, gameUsers)
 WorkerMessage.prototype.gameUserIDs = JSON.parse(JSON.stringify(gameInstance.getGameUserIDs()))
 
 parentPort.postMessage(new WorkerMessage('all', 'foundGame', gameInstance.getGameInfo()).convert())
-console.log(gameInstance)

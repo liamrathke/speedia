@@ -2,38 +2,36 @@
     <div class="vh-80" v-bind:class="{'center-parent': !smallDeviceHeight}">
         <navbar class="as-fs"></navbar>
         <div class="container">
-            <div>
-                <br>
-                <div class="row">
-                    <div class="col-md-10 col-lg-6 offset-md-1 offset-lg-3">
-                        <div class="input-group text-center">
-                            <input type="text" class="name-enter w-100 drop-shadow" v-bind:class="{'name-enter-success': verifyName()}" v-model="name" placeholder="Username" maxlength="30">
-                        </div>
-                        <br>
+            <br>
+            <div class="row">
+                <div class="col-md-10 col-lg-6 offset-md-1 offset-lg-3">
+                    <div class="input-group text-center">
+                        <input type="text" class="name-enter w-100 drop-shadow" v-bind:class="{'name-enter-success': verifyName()}" v-model="name" placeholder="Username" maxlength="30">
                     </div>
-                    <div class="col-sm-12 col-md-10 offset-md-1">
-                        <div class="row">
-                            <div class="col-6 col-lg-4" v-for="category in categories" v-bind:key="category.name">
-                                <div v-on:click="changeCategory(category.name)">
-                                    <div class="card drop-shadow b-0 br-0 unselected-category" v-bind:class="{'selected-category': selectedCategory === category.name}">
-                                        <ul class="list-group list-group-flush text-center">
-                                            <li class="list-group-item bg-t"><i class="fa fs-5 mt-3" v-bind:class="category.icon"></i></li>
-                                            <li class="list-group-item pt-0 bg-t">
-                                                <h4 v-if="!smallDeviceWidth">{{category.name}}</h4>
-                                                <h6 v-else>{{category.name}}</h6>
-                                            </li>
-                                        </ul>
-                                    </div>
+                    <br>
+                </div>
+                <div class="col-sm-12 col-md-10 offset-md-1">
+                    <div class="row">
+                        <div class="col-6 col-lg-4" v-for="category in categories" v-bind:key="category.name">
+                            <div v-on:click="changeCategory(category.name)">
+                                <div class="card drop-shadow b-0 br-0 unselected-category" v-bind:class="{'selected-category': selectedCategory === category.name}">
+                                    <ul class="list-group list-group-flush text-center">
+                                        <li class="list-group-item bg-t"><i class="fa fs-5 mt-3" v-bind:class="category.icon"></i></li>
+                                        <li class="list-group-item pt-0 bg-t">
+                                            <h4 v-if="!smallDeviceWidth">{{category.name}}</h4>
+                                            <h6 v-else>{{category.name}}</h6>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <br>
                             </div>
+                            <br>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-10 col-lg-6 offset-md-1 offset-lg-3 pb-3">
-                        <button type="button" class="btn btn-lg btn-success w-100 go-button drop-shadow" v-bind:class="{'go-button-success': verifyName()}" v-bind:disabled="!(verifyName() && queueButtonEnabled)" v-on:click="enterQueue()">Go!</button>
-                    </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10 col-lg-6 offset-md-1 offset-lg-3 pb-3">
+                    <button type="button" class="btn btn-lg btn-success w-100 go-button drop-shadow" v-bind:class="{'go-button-success': verifyName()}" v-bind:disabled="!(verifyName() && queueButtonEnabled)" v-on:click="enterQueue()">Go!</button>
                 </div>
             </div>
         </div>

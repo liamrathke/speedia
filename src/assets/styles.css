@@ -19,6 +19,9 @@ html {
   width: 100vw;
   background-color: var(--off-black);
 }
+.red-bg {
+  background-color: #DE3F63;
+}
 .drop-shadow {
   filter: drop-shadow(3px 6px 9px var(--off-black-80))
 }
@@ -90,14 +93,16 @@ html {
   align-items: center;
   justify-content: center;
 }
-.center-card {
-  z-index: 3;
+.standout-card {
   color: var(--off-black);
   background-color: #FFFFFF;
-  padding-left: 2em;
-  padding-right: 2em;
   border-width: 0;
   border-radius: 0;
+}
+.center-card {
+  z-index: 3;
+  padding-left: 2em;
+  padding-right: 2em;
 }
 .exit-button-container {
   position: absolute;
@@ -129,4 +134,33 @@ html {
 }
 .bg-t {
   background-color: transparent;
+}
+.ptb-1 {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+.ptb-15 {
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+}
+.post-n2 {
+  position: relative;
+  top: -2em;
+  left: 0;
+  right: 0; 
+  margin: auto;
+  width: 4em;
+}
+.post-2 {
+  position: absolute;
+  background-color: red;
+  padding-top: 0.75em;
+  padding-bottom: 0.75em;
+  width: 4em;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #FFFFFF;
+  background-color: var(--off-black);
+  z-index: 3;
+  transform: skew(-15deg);
 }

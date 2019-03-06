@@ -20,6 +20,7 @@ export default new Router({
   }, {
     path: '/gameFound',
     name: 'GameFound',
-    component: () => import('@/views/game/GameFound')
+    component: () => import('@/views/game/GameFound'),
+    props: true
   }]
 })

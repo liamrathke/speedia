@@ -9,7 +9,7 @@
                 <div class="game-progress progress">
                     <div class="game-progress-bar progress-bar progress-bar-striped progress-bar-animated" role="progressbar"></div>
                 </div>
-                <div class="center-card card drop-shadow b-0 br-0">
+                <div class="standout-card center-card card drop-shadow b-0 br-0">
                     <ul class="list-group list-group-flush text-center">
                         <li class="list-group-item b-0 bg-t"><i class="fa fs-10 mt-3 drop-shadow" v-bind:class="categoryInfo.icon"></i></li>
                         <li class="list-group-item b-0 pt-0 bg-t">
