@@ -164,3 +164,9 @@ html {
   z-index: 3;
   transform: skew(-15deg);
 }
+
+@media (min-width: 992px) {
+  .container-mw-lg {
+    width: 992px;
+  }
+}

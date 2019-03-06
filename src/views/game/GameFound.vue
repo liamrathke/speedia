@@ -1,6 +1,6 @@
 <template>
     <div class="dark-bg text-center center-parent">
-        <div class="container">
+        <div class="container container-mw-lg">
             <h1 class="game-text mb-6"><em>Game Found!</em></h1>
             <div class="row center-parent">
                 <div class="col-sm-12 col-md-5 p-0">
