@@ -1,8 +1,8 @@
 <template>
     <div class="standout-card card ptb-15 drop-shadow">
         <h1 class="mb-0">
-            <i class="fa p-1 mr-2" v-bind:class="gameUsers[0].category.icon"></i>
-            {{gameUsers[0].name}}
+            <i class="fa p-1 mr-2" v-bind:class="user.category.icon"></i>
+            {{user.name}}
         </h1>
     </div>
 </template>
@@ -16,3 +16,4 @@ export default {
     }
   }
 }
+</script>

@@ -4,12 +4,7 @@
             <h1 class="game-text mb-6"><em>Game Found!</em></h1>
             <div class="row center-parent">
                 <div class="col-sm-12 col-md-5 p-0">
-                    <div class="standout-card card ptb-15 drop-shadow">
-                        <h1 class="mb-0">
-                            <i class="fa p-1 mr-2" v-bind:class="gameUsers[0].category.icon"></i>
-                            {{gameUsers[0].name}}
-                        </h1>
-                    </div>
+                    <user-intro-card v-bind:user="gameUsers[0]"></user-intro-card>
                 </div>
                 <div class="col-sm-12 col-md-2 p-0">
                     <div class="text-center ptb-1 progress-bar progress-bar-striped progress-bar-animated red-bg">
@@ -21,12 +16,7 @@
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-5 p-0">
-                    <div class="standout-card card ptb-15 drop-shadow">
-                        <h1 class="mb-0">
-                            <i class="fa p-1 mr-2" v-bind:class="gameUsers[1].category.icon"></i>
-                            {{gameUsers[1].name}}
-                        </h1>
-                    </div>
+                    <user-intro-card v-bind:user="gameUsers[1]"></user-intro-card>
                 </div>
             </div>
         </div>
@@ -34,8 +24,11 @@
 </template>
 
 <script>
+import UserIntroCard from './GameFound/UserIntroCard'
+
 export default {
   name: 'GameFound',
+  components: {UserIntroCard},
   props: {
     gameInfo: {
       type: Object,
