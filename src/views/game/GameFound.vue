@@ -19,6 +19,10 @@
                     <user-intro-card v-bind:user="gameUsers[1]"></user-intro-card>
                 </div>
             </div>
+            <div class="d-none d-md-block">
+                <br>
+                <hr class="line-break-white">
+            </div>
         </div>
     </div>
 </template>

@@ -170,3 +170,10 @@ html {
     width: 992px;
   }
 }
+
+.line-break-white {
+  border-top: 3px solid #FFFFFF;
+  width: 100vw;
+  position: absolute;
+  left: 0;
+}
