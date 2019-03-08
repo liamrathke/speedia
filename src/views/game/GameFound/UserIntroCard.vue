@@ -1,0 +1,18 @@
+<template>
+    <div class="standout-card card ptb-15 drop-shadow">
+        <h1 class="mb-0">
+            <i class="fa p-1 mr-2" v-bind:class="gameUsers[0].category.icon"></i>
+            {{gameUsers[0].name}}
+        </h1>
+    </div>
+</template>
+
+<script>
+export default {
+  props: {
+    user: {
+      type: Object,
+      required: true
+    }
+  }
+}
