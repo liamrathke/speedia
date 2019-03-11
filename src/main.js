@@ -17,6 +17,15 @@ Vue.use(new VueSocketIO({
 
 Vue.config.productionTip = false
 
+// https://vuejs.org/v2/guide/components-registration.html
+// Register all default components inside the base folder for automatic import
+const requireComponent = require.context('./components/base', false, /Base[A-Z]\w+\.(vue|js)$/)
+requireComponent.keys().forEach(fileName => {
+  const componentConfig = requireComponent(fileName)
+  // const componentName = upperFirst(camelCase(fileName.replace(/^\.\/(.*)\.\w+$/, '$1')))
+  Vue.component(fileName, componentConfig.default || componentConfig)
+})
+
 new Vue({
   router,
   store,
