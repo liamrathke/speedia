@@ -22,8 +22,8 @@ Vue.config.productionTip = false
 const requireComponent = require.context('./components/base', false, /Base[A-Z]\w+\.(vue|js)$/)
 requireComponent.keys().forEach(fileName => {
   const componentConfig = requireComponent(fileName)
-  // const componentName = upperFirst(camelCase(fileName.replace(/^\.\/(.*)\.\w+$/, '$1')))
-  Vue.component(fileName, componentConfig.default || componentConfig)
+  const componentName = fileName.replace(/^\.\/(.*)\.\w+$/, '$1')
+  Vue.component(componentName, componentConfig.default || componentConfig)
 })
 
 new Vue({
