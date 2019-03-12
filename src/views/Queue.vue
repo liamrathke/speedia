@@ -1,9 +1,6 @@
 <template>
     <div class="dark-bg text-center center-parent">
-        <exit-button></exit-button>
-        <!-- <div class="exit-button-container">
-            <button type="button" class="btn btn-lg btn-danger w-100 exit-button drop-shadow b-0" v-bind:disabled="!(exitButtonEnabled)" v-on:click="exitQueue()">Exit</button>
-        </div>-->
+        <exit-button v-bind:enabled="exitButtonEnabled" v-on:exit="exitQueue()"></exit-button>
         <div class="center-box">
             <h1 class="game-text"><em>Finding Game...</em></h1>
             <div>
