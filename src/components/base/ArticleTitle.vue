@@ -15,7 +15,8 @@ export default {
       required: false
     },
     text: {
-      
+      type: String,
+      required: true
     }
   }
 }

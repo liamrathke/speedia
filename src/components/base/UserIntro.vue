@@ -10,12 +10,9 @@
 <script>
 export default {
   props: {
-    flag: {
-      type: String,
-      required: false
-    },
-    text: {
-      
+    user: {
+      type: Object,
+      required: true
     }
   }
 }
