@@ -19,7 +19,7 @@ Vue.config.productionTip = false
 
 // https://vuejs.org/v2/guide/components-registration.html
 // Register all default components inside the base folder for automatic import
-const requireComponent = require.context('./components/base', false, /Base[A-Z]\w+\.(vue|js)$/)
+const requireComponent = require.context('./components/base', false, /[A-Z]\w+\.(vue|js)$/)
 requireComponent.keys().forEach(fileName => {
   const componentConfig = requireComponent(fileName)
   const componentName = fileName.replace(/^\.\/(.*)\.\w+$/, '$1')
