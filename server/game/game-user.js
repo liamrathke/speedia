@@ -6,14 +6,13 @@ module.exports = class GameUser {
     this.name = gameUser.name
     this.gameID = false
     this.path = []
-    if (['History', 'News', 'Geography', 'Science', 'Culture'].indexOf(gameUser.selectedCategory) > -1) {
+    if (Object.keys(CategoryInfo).indexOf(gameUser.selectedCategory) > -1) {
       this.category = gameUser.selectedCategory
     } else if (gameUser.category) {
       this.category = gameUser.category
     } else {
       this.category = 'GrabBag'
     }
-    this.categoryInfo = CategoryInfo[this.category]
   }
   getInfo() {
     return {
@@ -24,14 +23,11 @@ module.exports = class GameUser {
   getExposableInfo() {
     return {
       name: this.name,
-      category: this.getCategoryInfo()
+      category: this.getCategory()
     }
   }
   getCategory() {
     return this.category
-  }
-  getCategoryInfo() {
-    return this.categoryInfo
   }
   updatePath(index, article) {
     this.path.splice(index, 1, article)

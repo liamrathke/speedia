@@ -11,7 +11,7 @@ module.exports =  class GameInstance {
     gameUsers.forEach(user => {
       this.gameUsers[user.getInfo().id.toString()] = user
       this.startEnd.push({
-        category: user.getCategoryInfo(), 
+        category: user.getCategory(), 
         article: articleSelector.getRandomArticle(user.getCategory())
       })
     })

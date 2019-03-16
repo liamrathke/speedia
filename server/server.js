@@ -24,8 +24,8 @@ io.on('connection', socket => {
   })
   socket.on('enterQueue', userQueueParameters => {
     userQueueParameters.id = socket.id
-    let userCategoryInfo = queueInstance.addUserToQueue(userQueueParameters, createNewGame)
-    io.to(socket.id).emit('enteredQueue', {categoryInfo: userCategoryInfo})
+    let userCategory = queueInstance.addUserToQueue(userQueueParameters, createNewGame)
+    io.to(socket.id).emit('enteredQueue', {category: userCategory})
     console.log(`Added user ${socket.id} to queue`)
   })
   socket.on('exitQueue', () => {

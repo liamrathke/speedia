@@ -7,13 +7,8 @@
                 <div class="game-progress progress">
                     <div class="game-progress-bar progress-bar progress-bar-striped progress-bar-animated" role="progressbar"></div>
                 </div>
-                <div class="standout-card center-card card drop-shadow b-0 br-0">
-                    <ul class="list-group list-group-flush text-center">
-                        <li class="list-group-item b-0 bg-t"><i class="fa fs-10 mt-3 drop-shadow" v-bind:class="categoryInfo.icon"></i></li>
-                        <li class="list-group-item b-0 pt-0 bg-t">
-                            <h1 class="drop-shadow">{{categoryInfo.name}}</h1>
-                        </li>
-                    </ul>
+                <div class="drop-shadow b-0 br-0">
+                    <category-card v-bind:category-alias="category"></category-card>
                 </div>
             </div>
         </div>
@@ -24,15 +19,10 @@
 export default {
   name: 'Queue',
   props: {
-    categoryInfo: {
-      type: Object,
+    category: {
+      type: String,
       required: false,
-      default: function() {
-        return {
-          icon: 'fa-question-circle',
-          name: 'Grab Bag'
-        }
-      }
+      default: 'GrabBag'
     }
   },
   data: function() {

@@ -12,7 +12,7 @@ module.exports = class GameQueue {
       let user = new GameUser(userQueueParameters)
       this.queueObject.push(user)
       this.queueHandler(callback)
-      return user.getCategoryInfo()
+      return user.getCategory()
     } else {
       return false
     }

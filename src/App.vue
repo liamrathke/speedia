@@ -15,8 +15,8 @@ export default {
     },
     enteredQueue: function(data) {
       console.log('User has entered the queue!')
-      if (data.categoryInfo.name) {
-        this.$router.push({name: 'Queue', params: {categoryInfo: data.categoryInfo}})
+      if (data.category) {
+        this.$router.push({name: 'Queue', params: {category: data.category}})
       } else {
         console.error('Failed to enter the queue!')
       }
