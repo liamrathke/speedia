@@ -1,9 +1,16 @@
 <template>
-    <div class="standout-card card ptb-15 drop-shadow">
-        <h1 class="mb-0">
-            <i class="fa p-1 mr-2" v-bind:class="user.category.icon"></i>
-            {{user.name}}
-        </h1>
+    <div class="standout-card card drop-shadow">
+        <div v-if="flag" class="row m-0">
+            <div class="col-2 col-md-1 center-parent">
+                <h5 v-if="flag" class="card-flag">{{flag}}</h5>
+            </div>
+            <div class="col-10 col-md-9 ptb-15 bl-1">
+                <p class="card-text">{{text}}</p>
+            </div>
+        </div>
+        <div v-else>
+            <p class="card-text">{{text}}</p>
+        </div>
     </div>
 </template>
 
