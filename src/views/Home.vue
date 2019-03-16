@@ -14,6 +14,7 @@
                     <div class="row">
                         <div class="col-6 col-lg-4" v-for="category in categories" v-bind:key="category.name">
                             <div v-on:click="changeCategory(category.name)">
+                                <category-card v-bind:selected="selectedCategory === category.name">
                                 <div class="card drop-shadow b-0 br-0 unselected-category" v-bind:class="{'selected-category': selectedCategory === category.name}">
                                     <ul class="list-group list-group-flush text-center">
                                         <li class="list-group-item bg-t"><i class="fa fs-5 mt-3" v-bind:class="category.icon"></i></li>
