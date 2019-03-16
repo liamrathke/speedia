@@ -12,4 +12,17 @@ module.exports = class WorkerMessage {
       gameUserIDs: this.gameUserIDs || []
     }
   }
+  static handleMessage(message, callback) {
+    switch (message.target) {
+      case 'all': {
+        message.gameUserIDs.forEach(userID => {
+          callback(userID, message.name, message.data)
+        })
+        break
+      }
+      default: {
+        callback(userID, message.name, message.data)
+      }
+    }
+  }
 }

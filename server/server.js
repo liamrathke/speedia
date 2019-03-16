@@ -11,6 +11,7 @@ let {join} = require('path')
 let gameThreads = {}
 
 let QueueInstance = require('./queue/queue-instance')
+let WorkerMessage = require('./game/worker-message')
 
 server.listen(8079)
 
@@ -36,6 +37,10 @@ io.on('connection', socket => {
   })
 })
 
+function sendMessageToUser(userID, messageName, messageData) {
+  io.to(userID).emit(messageName, messageData)
+}
+
 function generateGameID(gameUsers) {
   return gameUsers.map(user => user.id).sort().join('')
 }
@@ -51,27 +56,8 @@ function createNewGame(newGameUsers) {
     }
   })
   worker.on('message', message => {
-    workerMessageHandler(message)
+    WorkerMessage.handleMessage(message, sendMessageToUser)
   })
   gameThreads[gameID] = worker
   console.log('New game created!')
-}
-
-function workerMessageHandler(message) {
-  switch (message.target) {
-    case 'all': {
-      message.gameUserIDs.forEach(userID => {
-        io.to(userID).emit(message.name, message.data)
-      })
-      console.log('Sending message to all users')
-      break
-    }
-    case 'individuals': {
-      console.log('Sending message to each user individually')
-      break
-    }
-    default: {
-      console.log('Keeping message internal')
-    }
-  }
 }

@@ -34,4 +34,7 @@ module.exports =  class GameInstance {
   getCurrentRound() {
     return this.currentRound
   }
+  wait(ms) {
+    return new Promise(done => setTimeout(done, ms))
+  }
 }

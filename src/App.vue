@@ -28,6 +28,12 @@ export default {
     foundGame: function(data) {
       console.log('User has found a game!')
       this.$router.push({name: 'GameFound', params: {gameInfo: data}})
+    },
+    nextRound: function(data) {
+      console.log('Next round starting!')
+    },
+    roundAction: function(data) {
+      console.log('Round action starting!')
     }
   }
 }
