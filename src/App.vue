@@ -31,6 +31,7 @@ export default {
     },
     nextRound: function(data) {
       console.log('Next round starting!')
+      this.$router.push({name: 'NextRound', params: {roundInfo: data}})
     },
     roundAction: function(data) {
       console.log('Round action starting!')

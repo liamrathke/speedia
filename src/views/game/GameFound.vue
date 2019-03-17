@@ -54,9 +54,6 @@ export default {
     startEnd() {
       return this.gameInfo.startEnd
     }
-  },
-  mounted: function() {
-    console.log('Game found!')
   }
 }
 </script>
