@@ -23,11 +23,15 @@ module.exports = class GameUser {
   getExposableInfo() {
     return {
       name: this.name,
-      category: this.getCategory()
+      category: this.getCategory(),
+      lastArticle: this.getLastArticle()
     }
   }
   getCategory() {
     return this.category
+  }
+  getLastArticle() {
+    return this.path[this.path.length - 1]
   }
   updatePath(index, article) {
     this.path.splice(index, 1, article)

@@ -18,17 +18,42 @@ module.exports =  class GameInstance {
     while (this.startEnd[0].article === this.startEnd[1].article) {
       this.startEnd[1].article = articleSelector.getRandomArticle(this.startEnd[1].category)
     }
-    Object.keys(this.gameUsers).forEach(userID => {
+    this.applyToEachUser(userID => {
       this.gameUsers[userID].updatePath(this.currentRound, this.startEnd[0].article)
     })
+  }
+  isGameDone() {
+    let done = false
+    let finalArticle = this.startEnd[1].article
+    this.applyToEachUser(userID => {
+      if (this.gameUsers[userID].getLastArticle() === finalArticle) {
+        done = true
+      }
+    })
+    return done
   }
   getGameUserIDs() {
     return Object.keys(this.gameUsers)
   }
+  applyToEachUser(callback) {
+    this.getGameUserIDs().forEach(userID => {
+      callback(userID)
+    })
+  }
+  getExposedGameUsers() {
+    return this.getGameUserIDs().map(userID => this.gameUsers[userID].getExposableInfo())
+  }
   getGameInfo() {
     return {
-      exposedGameUsers: this.getGameUserIDs().map(userID => this.gameUsers[userID].getExposableInfo()),
+      exposedGameUsers: this.getExposedGameUsers(),
       startEnd: this.startEnd
+    }
+  }
+  getRoundInfo() {
+    return {
+      exposedGameUsers: this.getExposedGameUsers(),
+      currentRound: this.getCurrentRound(),
+      end: this.startEnd[1].article,
     }
   }
   getCurrentRound() {
