@@ -4,7 +4,7 @@
             <user-intro v-bind:user="user"></user-intro>
             <div class="text-white w-100 mt-2 fs-15">
                 is at
-                <h2 class="d-inline-block mb-0">{{user.lastArticle}}</h2>
+                <h2 class="d-inline-block mb-0 drop-shadow">{{user.lastArticle}}</h2>
             </div>
         </div>
     </div>

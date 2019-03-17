@@ -27,5 +27,10 @@ export default new Router({
     name: 'NextRound',
     component: () => import('@/views/game/NextRound'),
     props: true
+  }, {
+    path: '/roundAction',
+    name: 'RoundAction',
+    component: () => import('@/views/game/RoundAction'),
+    props: true
   }]
 })
