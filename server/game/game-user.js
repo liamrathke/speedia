@@ -6,6 +6,7 @@ module.exports = class GameUser {
     this.name = gameUser.name
     this.gameID = false
     this.path = []
+    this.nextArticles = []
     if (Object.keys(CategoryInfo).indexOf(gameUser.selectedCategory) > -1) {
       this.category = gameUser.selectedCategory
     } else if (gameUser.category) {
@@ -32,6 +33,12 @@ module.exports = class GameUser {
   }
   getLastArticle() {
     return this.path[this.path.length - 1]
+  }
+  updateNextArticles() {
+    // Cache the available articles for the user to pick
+  }
+  getNextArticles() {
+    // Return the cache for the next available articles
   }
   updatePath(index, article) {
     this.path.splice(index, 1, article)

@@ -4,22 +4,23 @@ let WorkerMessage = require('./worker-message')
 
 let GameUser = require('./game-user')
 let GameInstance = require('./game-instance')
+let ThreadHelper = require('./thread-helper')
 
 // Re-initialize the users as GameUsers, because the class is lost when data is passed between threads
 let gameUsers = workerData.gameUsers.map(user => new GameUser(user))
 
 let gameInstance = new GameInstance(workerData.gameID, gameUsers)
-WorkerMessage.prototype.gameUserIDs = JSON.parse(JSON.stringify(gameInstance.getGameUserIDs()))
+let threadHelper = new ThreadHelper(parentPort, gameInstance.getGameUserIDs())
 
 // Run the game asynchronously to add delays
 async function runGame() {
-  parentPort.postMessage(new WorkerMessage('all', 'foundGame', gameInstance.getGameInfo()).convert())
+  threadHelper.sendToParent('all', 'foundGame', gameInstance.getGameInfo())
   await gameInstance.wait(5000)
   if (true) {
   // while (!gameInstance.isGameDone()) {
-    parentPort.postMessage(new WorkerMessage('all', 'nextRound', gameInstance.getRoundInfo()).convert())
+    threadHelper.sendToParent('all', 'nextRound', gameInstance.getRoundInfo())
     await gameInstance.wait(5000)
-    parentPort.postMessage(new WorkerMessage('all', 'roundAction', gameInstance.getRoundInfo()).convert())
+    threadHelper.sendToParent('all', 'roundAction', gameInstance.getRoundInfo())
     await gameInstance.wait(10000)
   }
 }

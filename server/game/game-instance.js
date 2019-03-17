@@ -56,6 +56,9 @@ module.exports =  class GameInstance {
       end: this.startEnd[1].article,
     }
   }
+  getActionInfo(userID) {
+     // Return the data for each user that will be displayed in the action screen
+  }
   getCurrentRound() {
     return this.currentRound
   }
