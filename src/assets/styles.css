@@ -190,3 +190,14 @@ html {
   color: #FFFFFF;
   margin: 0.25em;
 }
+.goal-text {
+  align-self: flex-start;
+  width: 100vw;
+  margin-top: -2em;
+}
+.ai-end {
+  align-items: end;
+}
+.start-edge {
+  position: relative;
+}
