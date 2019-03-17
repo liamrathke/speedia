@@ -18,6 +18,8 @@ async function runGame() {
   if (true) {
   // while (!gameInstance.isGameDone()) {
     parentPort.postMessage(new WorkerMessage('all', 'nextRound', gameInstance.getRoundInfo()).convert())
+    await gameInstance.wait(5000)
+    parentPort.postMessage(new WorkerMessage('all', 'roundAction', gameInstance.getRoundInfo()).convert())
     await gameInstance.wait(10000)
   }
 }

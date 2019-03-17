@@ -7,23 +7,15 @@
 </template>
 
 <script>
-import {ArticleList, ArticleSearch, Countdown} from './RoundAction'
+import {ArticleList, ArticleSearch, Countdown} from './RoundAction/index.js'
 
 export default {
   name: 'RoundAction',
   components: {ArticleList, ArticleSearch, Countdown},
   props: {
-    gameInfo: {
+    actionInfo: {
       type: Object,
       required: true
-    }
-  },
-  computed: {
-    gameUsers() {
-      return this.gameInfo.exposedGameUsers
-    },
-    startEnd() {
-      return this.gameInfo.startEnd
     }
   }
 }

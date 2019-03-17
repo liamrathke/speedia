@@ -35,6 +35,7 @@ export default {
     },
     roundAction: function(data) {
       console.log('Round action starting!')
+      this.$router.push({name: 'RoundAction', params: {actionInfo: data}})
     }
   }
 }
