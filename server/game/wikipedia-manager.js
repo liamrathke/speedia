@@ -1,8 +1,7 @@
-let Wikipedia = require('wikijs')
+let Wikipedia = require('wikijs').default
 
 module.exports = class WikipediaManager {
   static getPage(title) {
-    console.log(`Requesting page for ${title}`)
-    return Wikipedia.page(title)
+    return Wikipedia().find(title)
   }
 }

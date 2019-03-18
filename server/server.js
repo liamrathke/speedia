@@ -22,20 +22,19 @@ let queueInstance = new QueueInstance()
 io.on('connection', socket => {
   console.log(`User ${socket.id} has connected`)
   socket.on('disconnect', () => {
-    queueInstance.removeUserFromQueue(socket.id)
     console.log(`User ${socket.id} has disconnected`)
+    queueInstance.removeUserFromQueue(socket.id)
   })
   socket.on('enterQueue', userQueueParameters => {
     userQueueParameters.id = socket.id
+    console.log(`Adding user ${socket.id} to queue`)
     let userCategory = queueInstance.addUserToQueue(userQueueParameters, createNewGame)
     io.to(socket.id).emit('enteredQueue', {category: userCategory})
-    console.log(`Added user ${socket.id} to queue`)
   })
   socket.on('exitQueue', () => {
+    console.log(`Removing user ${socket.id} from queue`)
     queueInstance.removeUserFromQueue(socket.id)
     io.to(socket.id).emit('exitedQueue', true)
-    console.log(`Removed user ${socket.id} from queue`)
-    console.log(`Current queue length: ${queueInstance.getQueueLength()}`)
   })
 })
 

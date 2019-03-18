@@ -66,18 +66,15 @@ module.exports =  class GameInstance {
       user.startNextRound()
     })
   }
-  updateNextArticles() {
+  async updateNextArticles() {
+    let initialTime = Date.now()
     let latestTitles = this.getGameUserIDs().map(userID => this.gameUsers[userID].getLastArticle())
-    console.log(latestTitles)
-    return Promise.all(latestTitles.map(title => {
-      let getPageReturn = WikipediaManager.getPage(title)
-      console.log(getPageReturn)
-      return getPageReturn
-    })).then(pages => {
-      pages.forEach((page, pageIndex) => {
-        console.log(page.links())
-        this.gameUsers[this.getGameUserIDs()[pageIndex]].setNextArticles(page.links())
-      })
+    let pages = await Promise.all(latestTitles.map(title => WikipediaManager.getPage(title)))
+    console.log(`Pages collected in ${Date.now() - initialTime} ms`)
+    let links = await Promise.all(pages.map(page => page.links()))
+    console.log(`Links collected in ${Date.now() - initialTime} ms`)
+    links.forEach(function(link, linkIndex) {
+      this.gameUsers[this.getGameUserIDs()[linkIndex]].setNextArticles(links)
     })
   }
   getCurrentRound() {

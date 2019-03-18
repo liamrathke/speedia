@@ -14,7 +14,7 @@ let threadHelper = new ThreadHelper(parentPort, gameInstance.getGameUserIDs())
 
 // Run the game asynchronously to add delays
 async function runGame() {
-  await showFoundGame(5000)
+  await showFoundGame(2000)
   if (true) {
   // while (!gameInstance.isGameDone()) {
     await showNextRound(5000)
@@ -30,13 +30,13 @@ function showFoundGame(ms) {
   })
 }
 
-async function showNextRound(ms) {
-  return new Promise(async (resolve) => {
-    let initialTime = Date.now()
-    threadHelper.sendToParent('all', 'nextRound', gameInstance.getRoundInfo())
-    await gameInstance.updateNextArticles()
-    let delayLeft = ms - (Date.now() - initialTime)
-    console.log(`${delayLeft} ms left after updating articles`)
+function showNextRound(ms) {
+  let initialTime = Date.now()
+  threadHelper.sendToParent('all', 'nextRound', gameInstance.getRoundInfo())
+  gameInstance.updateNextArticles()
+  let delayLeft = ms - (Date.now() - initialTime)
+  console.log(`${delayLeft} ms left after updating articles`)
+  return new Promise(resolve => {
     setTimeout(() => {
       gameInstance.setupNextRound()
       resolve()
