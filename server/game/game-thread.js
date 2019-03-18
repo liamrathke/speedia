@@ -17,24 +17,31 @@ async function runGame() {
   await showFoundGame(5000)
   if (true) {
   // while (!gameInstance.isGameDone()) {
-    threadHelper.sendToParent('all', 'nextRound', gameInstance.getRoundInfo())
-    await gameInstance.wait(5000)
+    await showNextRound(5000)
     threadHelper.sendToParent('all', 'roundAction', gameInstance.getRoundInfo())
     await gameInstance.wait(10000)
   }
 }
 
-async function showFoundGame(ms) {
-  threadHelper.sendToParent('all', 'foundGame', gameInstance.getGameInfo())
+function showFoundGame(ms) {
   return new Promise(resolve => {
-    setTimeout(() => {
-      resolve()
-    }, ms)
+    threadHelper.sendToParent('all', 'foundGame', gameInstance.getGameInfo())
+    setTimeout(() => {resolve()}, ms)
   })
 }
 
-async function showNextRound(time) {
-  
+async function showNextRound(ms) {
+  return new Promise(async (resolve) => {
+    let initialTime = Date.now()
+    threadHelper.sendToParent('all', 'nextRound', gameInstance.getRoundInfo())
+    await gameInstance.updateNextArticles()
+    let delayLeft = ms - (Date.now() - initialTime)
+    console.log(`${delayLeft} ms left after updating articles`)
+    setTimeout(() => {
+      gameInstance.setupNextRound()
+      resolve()
+    }, delayLeft)
+  })
 }
 
 async function showRoundAction(time) {

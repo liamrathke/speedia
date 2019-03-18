@@ -34,11 +34,14 @@ module.exports = class GameUser {
   getLastArticle() {
     return this.path[this.path.length - 1]
   }
-  updateNextArticles() {
-    // Cache the available articles for the user to pick
+  setNextArticles(articles) {
+    this.nextArticles = articles
   }
   getNextArticles() {
-    // Return the cache for the next available articles
+    return this.nextArticles
+  }
+  startNextRound() {
+    this.path.push(this.getLastArticle())
   }
   updatePath(index, article) {
     this.path.splice(index, 1, article)

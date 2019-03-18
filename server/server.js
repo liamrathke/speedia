@@ -3,7 +3,9 @@ console.log('Starting backend server...')
 let express = require('express')
 let app = express()
 let server = require('http').createServer(app)
-let io = require('socket.io')(server)
+let io = require('socket.io')(server, {
+  pingTimeout: 60000
+})
 
 let {Worker} = require('worker_threads')
 let {join} = require('path')

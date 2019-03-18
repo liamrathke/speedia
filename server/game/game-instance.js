@@ -1,4 +1,5 @@
 let ArticleSelector = require('./article-selector')
+let WikipediaManager = require('./wikipedia-manager')
 
 let articleSelector = new ArticleSelector()
 
@@ -18,15 +19,15 @@ module.exports =  class GameInstance {
     while (this.startEnd[0].article === this.startEnd[1].article) {
       this.startEnd[1].article = articleSelector.getRandomArticle(this.startEnd[1].category)
     }
-    this.applyToEachUser(userID => {
-      this.gameUsers[userID].updatePath(this.currentRound, this.startEnd[0].article)
+    this.applyToEachUser(user => {
+      user.updatePath(this.currentRound, this.startEnd[0].article)
     })
   }
   isGameDone() {
     let done = false
     let finalArticle = this.startEnd[1].article
-    this.applyToEachUser(userID => {
-      if (this.gameUsers[userID].getLastArticle() === finalArticle) {
+    this.applyToEachUser(user => {
+      if (user.getLastArticle() === finalArticle) {
         done = true
       }
     })
@@ -37,7 +38,7 @@ module.exports =  class GameInstance {
   }
   applyToEachUser(callback) {
     this.getGameUserIDs().forEach(userID => {
-      callback(userID)
+      callback(this.gameUsers[userID])
     })
   }
   getExposedGameUsers() {
@@ -58,6 +59,26 @@ module.exports =  class GameInstance {
   }
   getActionInfo(userID) {
      // Return the data for each user that will be displayed in the action screen
+  }
+  setupNextRound() {
+    this.currentRound++
+    this.applyToEachUser(user => {
+      user.startNextRound()
+    })
+  }
+  updateNextArticles() {
+    let latestTitles = this.getGameUserIDs().map(userID => this.gameUsers[userID].getLastArticle())
+    console.log(latestTitles)
+    return Promise.all(latestTitles.map(title => {
+      let getPageReturn = WikipediaManager.getPage(title)
+      console.log(getPageReturn)
+      return getPageReturn
+    })).then(pages => {
+      pages.forEach((page, pageIndex) => {
+        console.log(page.links())
+        this.gameUsers[this.getGameUserIDs()[pageIndex]].setNextArticles(page.links())
+      })
+    })
   }
   getCurrentRound() {
     return this.currentRound
