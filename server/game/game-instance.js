@@ -57,6 +57,12 @@ module.exports =  class GameInstance {
       end: this.startEnd[1].article,
     }
   }
+  getLatestArticles() {
+    let gameUsers = this.gameUsers
+    return this.getGameUserIDs().map(userID => {
+      return gameUsers[userID].getLastArticle()
+    })
+  }
   getActionInfo(userID) {
      // Return the data for each user that will be displayed in the action screen
   }
@@ -66,14 +72,15 @@ module.exports =  class GameInstance {
       user.startNextRound()
     })
   }
-  updateNextArticles() {
-    let articleTitles = this.getGameUserIDs().map(userID => this.gameUsers[userID].getLastArticle())
-    return Promise.all(articleTitles.map(function(title) {
+  async updateNextArticles() {
+    let articleTitles = this.getLatestArticles()
+    let linkLists = await Promise.all(articleTitles.map(function(title) {
       return WikipediaManager.getLinks(title)
-    })).then(function(linkLists) {
-      linkLists.forEach(function(linkList, linkIndex) {
-        this.gameUsers[this.getGameUserIDs()[linkIndex]].setNextArticles(linkList)
-      })
+    }))
+    console.log('TEST 1', this.gameUsers)
+    linkLists.forEach.call(this, function(linkList, linkIndex) {
+      console.log('TEST 2', this.gameUsers)
+      this.gameUsers[this.getGameUserIDs()[linkIndex]].setNextArticles(linkList)
     })
   }
   getCurrentRound() {
