@@ -30,10 +30,10 @@ function showFoundGame(ms) {
   })
 }
 
-function showNextRound(ms) {
+async function showNextRound(ms) {
   let initialTime = Date.now()
   threadHelper.sendToParent('all', 'nextRound', gameInstance.getRoundInfo())
-  gameInstance.updateNextArticles()
+  await gameInstance.updateNextArticles()
   let delayLeft = ms - (Date.now() - initialTime)
   console.log(`${delayLeft} ms left after updating articles`)
   return new Promise(resolve => {

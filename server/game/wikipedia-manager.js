@@ -1,7 +1,8 @@
 let Wikipedia = require('wikijs').default
 
 module.exports = class WikipediaManager {
-  static getPage(title) {
-    return Wikipedia().find(title)
+  static async getLinks(title) {
+    let page = await Wikipedia().find(title)
+    return page.links()
   }
 }
