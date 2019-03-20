@@ -80,7 +80,6 @@ module.exports =  class GameInstance {
     let linkLists = await Promise.all(articleTitles.map(function(title) {
       return WikipediaManager.getLinks(title)
     }))
-    console.log(linkLists.length, linkLists[0].length, linkLists[1].length)
     linkLists.forEach(function(linkList, linkIndex) {
       this.gameUsers[this.getGameUserIDs()[linkIndex]].setNextArticles(linkList)
     }, this)

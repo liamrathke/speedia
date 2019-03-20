@@ -45,12 +45,11 @@ async function showNextRound(ms) {
 }
 
 function showRoundAction(ms) {
+  gameInstance.getGameUserIDs().forEach(userID => {
+    threadHelper.sendToParent(userID, 'roundAction', gameInstance.getActionInfo(userID))
+  })
   return new Promise(resolve => {
     setTimeout(() => {
-      gameInstance.getGameUserIDs().forEach(userID => {
-        threadHelper.sendToParent(userID, 'roundAction', gameInstance.getActionInfo(userID))
-        console.log(gameInstance.getActionInfo(userID))
-      })
       resolve()
     }, ms)
   })
