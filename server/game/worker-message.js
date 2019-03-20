@@ -21,7 +21,7 @@ module.exports = class WorkerMessage {
         break
       }
       default: {
-        callback(userID, message.name, message.data)
+        callback(message.target, message.name, message.data)
       }
     }
   }

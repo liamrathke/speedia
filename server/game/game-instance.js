@@ -64,7 +64,10 @@ module.exports =  class GameInstance {
     })
   }
   getActionInfo(userID) {
-     // Return the data for each user that will be displayed in the action screen
+    return {
+      end: this.startEnd[1].article,
+      articles: this.gameUsers[userID].getNextArticles()
+    }
   }
   setupNextRound() {
     this.currentRound++
@@ -77,11 +80,10 @@ module.exports =  class GameInstance {
     let linkLists = await Promise.all(articleTitles.map(function(title) {
       return WikipediaManager.getLinks(title)
     }))
-    console.log('TEST 1', this.gameUsers)
-    linkLists.forEach.call(this, function(linkList, linkIndex) {
-      console.log('TEST 2', this.gameUsers)
+    console.log(linkLists.length, linkLists[0].length, linkLists[1].length)
+    linkLists.forEach(function(linkList, linkIndex) {
       this.gameUsers[this.getGameUserIDs()[linkIndex]].setNextArticles(linkList)
-    })
+    }, this)
   }
   getCurrentRound() {
     return this.currentRound
