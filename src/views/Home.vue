@@ -33,7 +33,7 @@
 <script>
 import Navbar from '@/components/Navbar'
 
-import CategoryInfo from '#/game/category-info.js'
+import CategoryInfo from '#/game/support/category-info.js'
 
 export default {
   name: 'Home',

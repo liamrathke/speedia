@@ -1,4 +1,4 @@
-let Articles = require('../articles/index')
+let Articles = require('../../articles/index')
 
 module.exports = class ArticleSelector {
   getRandomArticle(category) {

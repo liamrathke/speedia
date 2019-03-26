@@ -13,7 +13,7 @@ let {join} = require('path')
 let gameThreads = {}
 
 let QueueInstance = require('./queue/queue-instance')
-let WorkerMessage = require('./game/worker-message')
+let WorkerMessage = require('./game/threading/worker-message')
 
 server.listen(8079)
 
@@ -49,7 +49,7 @@ function generateGameID(gameUsers) {
 function createNewGame(newGameUsers) {
   console.log('Creating new game')
   let gameID = generateGameID(newGameUsers)
-  let gameThreadFile = join(__dirname, './game/game-thread.js')
+  let gameThreadFile = join(__dirname, './game/threading/game-thread.js')
   let worker = new Worker(gameThreadFile, {
     workerData: {
       gameID: gameID,

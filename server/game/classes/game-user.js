@@ -1,4 +1,4 @@
-let CategoryInfo = require('./category-info')
+let CategoryInfo = require('../support/category-info')
 
 module.exports = class GameUser {
   constructor(gameUser) {

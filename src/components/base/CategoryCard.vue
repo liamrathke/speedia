@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import CategoryInfo from '#/game/category-info.js'
+import CategoryInfo from '#/game/support/category-info.js'
 
 export default {
   props: {

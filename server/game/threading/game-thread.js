@@ -2,8 +2,8 @@ let {parentPort, workerData} = require('worker_threads')
 
 let WorkerMessage = require('./worker-message')
 
-let GameUser = require('./game-user')
-let GameInstance = require('./game-instance')
+let GameUser = require('../classes/game-user')
+let GameInstance = require('../classes/game-instance')
 let ThreadHelper = require('./thread-helper')
 
 // Re-initialize the users as GameUsers, because the class is lost when data is passed between threads

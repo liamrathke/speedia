@@ -1,5 +1,5 @@
-let ArticleSelector = require('./article-selector')
-let WikipediaManager = require('./wikipedia-manager')
+let ArticleSelector = require('../support/article-selector')
+let WikipediaManager = require('../support/wikipedia-manager')
 
 let articleSelector = new ArticleSelector()
 

@@ -1,4 +1,4 @@
-let GameUser = require('../game/game-user')
+let GameUser = require('../game/classes/game-user')
 
 module.exports = class GameQueue {
   constructor() {
