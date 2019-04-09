@@ -26,6 +26,7 @@ io.on('connection', socket => {
   socket.on('disconnect', () => {
     console.log(`User ${socket.id} has disconnected`)
     queueInstance.removeUserFromQueue(socket.id)
+    // If the user is in a game, end it
   })
   socket.on('enterQueue', userQueueParameters => {
     userQueueParameters.id = socket.id
@@ -37,6 +38,12 @@ io.on('connection', socket => {
     console.log(`Removing user ${socket.id} from queue`)
     queueInstance.removeUserFromQueue(socket.id)
     io.to(socket.id).emit('exitedQueue', true)
+  })
+  socket.on('selectArticle', article => {
+    // Triggered when the user selects an article
+  })
+  socket.on('leaveGame', () => {
+    // Triggered when the user leaves the game
   })
 })
 
