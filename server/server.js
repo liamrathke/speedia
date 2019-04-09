@@ -12,6 +12,8 @@ let {join} = require('path')
 
 let gameThreads = {}
 
+let userGameMap = {}
+
 let QueueInstance = require('./queue/queue-instance')
 let WorkerMessage = require('./game/threading/worker-message')
 
@@ -49,6 +51,9 @@ function generateGameID(gameUsers) {
 function createNewGame(newGameUsers) {
   console.log('Creating new game')
   let gameID = generateGameID(newGameUsers)
+  newGameUsers.map(user => user.id).forEach(userID => {
+    userGameMap[userID] = gameID
+  })
   let gameThreadFile = join(__dirname, './game/threading/game-thread.js')
   let worker = new Worker(gameThreadFile, {
     workerData: {
