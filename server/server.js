@@ -11,7 +11,6 @@ let {Worker} = require('worker_threads')
 let {join} = require('path')
 
 let gameThreads = {}
-
 let userGameMap = {}
 
 let QueueInstance = require('./queue/queue-instance')
@@ -40,7 +39,8 @@ io.on('connection', socket => {
     io.to(socket.id).emit('exitedQueue', true)
   })
   socket.on('selectArticle', article => {
-    // Triggered when the user selects an article
+    let gameID = userGameMap[socket.id]
+    gameThreads[gameID].postMessage(new WorkerMessage(socket.id, 'selectArticle', article))
   })
   socket.on('leaveGame', () => {
     // Triggered when the user leaves the game

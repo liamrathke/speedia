@@ -1,7 +1,5 @@
 let {parentPort, workerData} = require('worker_threads')
 
-let WorkerMessage = require('./worker-message')
-
 let GameUser = require('../classes/game-user')
 let GameInstance = require('../classes/game-instance')
 let PortHelper = require('./port-helper')
@@ -11,6 +9,16 @@ let gameUsers = workerData.gameUsers.map(user => new GameUser(user))
 
 let gameInstance = new GameInstance(workerData.gameID, gameUsers)
 let portHelper = new PortHelper(parentPort, gameInstance.getGameUserIDs())
+
+parentPort.on('message', message => {
+  switch (message.name) {
+    case 'selectArticle': {
+      gameInstance.selectArticle(message.target, message.data)
+      console.log('Article Selected!', message.target, message.data)
+      break
+    }
+  }
+})
 
 // Run the game asynchronously to add delays
 async function runGame() {
