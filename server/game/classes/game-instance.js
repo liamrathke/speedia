@@ -84,6 +84,9 @@ module.exports =  class GameInstance {
       this.gameUsers[this.getGameUserIDs()[linkIndex]].setNextArticles(linkList)
     }, this)
   }
+  selectArticle(userID, article) {
+    this.gameUsers[userID].updatePath(this.getCurrentRound(), article)
+  }
   getCurrentRound() {
     return this.currentRound
   }

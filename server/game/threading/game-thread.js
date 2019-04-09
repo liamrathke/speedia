@@ -4,13 +4,13 @@ let WorkerMessage = require('./worker-message')
 
 let GameUser = require('../classes/game-user')
 let GameInstance = require('../classes/game-instance')
-let ThreadHelper = require('./thread-helper')
+let PortHelper = require('./port-helper')
 
 // Re-initialize the users as GameUsers, because the class is lost when data is passed between threads
 let gameUsers = workerData.gameUsers.map(user => new GameUser(user))
 
 let gameInstance = new GameInstance(workerData.gameID, gameUsers)
-let threadHelper = new ThreadHelper(parentPort, gameInstance.getGameUserIDs())
+let portHelper = new PortHelper(parentPort, gameInstance.getGameUserIDs())
 
 // Run the game asynchronously to add delays
 async function runGame() {
@@ -24,14 +24,14 @@ async function runGame() {
 
 function showFoundGame(ms) {
   return new Promise(resolve => {
-    threadHelper.sendToParent('all', 'foundGame', gameInstance.getGameInfo())
+    portHelper.sendToPort('all', 'foundGame', gameInstance.getGameInfo())
     setTimeout(() => {resolve()}, ms)
   })
 }
 
 async function showNextRound(ms) {
   let initialTime = Date.now()
-  threadHelper.sendToParent('all', 'nextRound', gameInstance.getRoundInfo())
+  portHelper.sendToPort('all', 'nextRound', gameInstance.getRoundInfo())
   await gameInstance.updateNextArticles()
   let delayLeft = ms - (Date.now() - initialTime)
   delayLeft = (delayLeft < 0) ? 0 : delayLeft
@@ -46,7 +46,7 @@ async function showNextRound(ms) {
 
 function showRoundAction(ms) {
   gameInstance.getGameUserIDs().forEach(userID => {
-    threadHelper.sendToParent(userID, 'roundAction', gameInstance.getActionInfo(userID))
+    portHelper.sendToPort(userID, 'roundAction', gameInstance.getActionInfo(userID))
   })
   return new Promise(resolve => {
     setTimeout(() => {
