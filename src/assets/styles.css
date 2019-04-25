@@ -195,6 +195,9 @@ html {
   width: 100vw;
   margin-top: -2em;
 }
+.ai-center {
+  align-items: center;
+}
 .ai-end {
   align-items: end;
 }

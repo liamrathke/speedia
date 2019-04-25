@@ -1,6 +1,6 @@
 <template>
-    <button class="standout-card card drop-shadow w-100">
-        <p class="card-text w-100 text-center w-100">{{articleTitle}}</p>
+    <button class="standout-card card drop-shadow w-100 ai-center">
+        <p class="card-text">{{articleTitle}}</p>
     </button>
 </template>
 
