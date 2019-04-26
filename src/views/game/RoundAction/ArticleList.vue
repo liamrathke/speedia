@@ -2,7 +2,7 @@
     <div class="container container-mw-lg">
         <div class="buttons-wrapper">
             <div class="article-button" v-for="article in articles" v-bind:key="article">
-                <article-button v-bind:articleTitle="article" v-bind:selected="selectedArticle === article" v-on:select="selectedArticle = article"></article-button>
+                <article-button v-bind:articleTitle="article" v-bind:selected="selectedArticle === article" v-on:select="$emit('select', article)"></article-button>
             </div>
         </div>
     </div>
