@@ -33,6 +33,33 @@ module.exports =  class GameInstance {
     })
     return done
   }
+  getGameWinner() {
+    if (this.isGameDone()) {
+      let winnerIDs = []
+      this.applyToEachUser(user => {
+        if (user.getLastArticle() === this.startEnd[1].article) {
+          winnerIDs.push(user.getInfo().id)
+        }
+      })
+      if (winnerIDs.length === 1) {
+        return {
+          tie: false,
+          disconnect: false,
+          winnerName: this.gameUsers[userID].getInfo().name,
+          winnerPath: this.gameUsers[userID].getPath()
+        }
+      } else if (winnerIDs.length === 2) {
+        return {
+          tie: true,
+          disconnect: false
+        }
+      } else {
+        return undefined
+      }
+    } else {
+      return undefined
+    }
+  }
   getGameUserIDs() {
     return Object.keys(this.gameUsers)
   }

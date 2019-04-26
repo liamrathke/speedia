@@ -23,8 +23,8 @@ parentPort.on('message', message => {
 // Run the game asynchronously to add delays
 async function runGame() {
   await showFoundGame(2000)
-  if (true) {
-  // while (!gameInstance.isGameDone()) {
+  // if (true) {
+  while (!gameInstance.isGameDone()) {
     await showNextRound(5000)
     await showRoundAction(10000)
   }
@@ -61,6 +61,14 @@ function showRoundAction(ms) {
       resolve()
     }, ms)
   })
+}
+
+function showGameWon() {
+  let gameWinnerInfo = gameInstance.getGameWinner()
+  if (gameWinnerInfo) {
+    console.log('Game done, sending winning information!')
+    portHelper.sendToPort('all', 'gameWinner', gameWinnerInfo)
+  }
 }
 
 runGame()

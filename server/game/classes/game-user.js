@@ -47,4 +47,7 @@ module.exports = class GameUser {
     this.path.splice(index, 1, article)
     return this.path
   }
+  getPath() {
+    return this.path
+  }
 }
