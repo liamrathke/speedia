@@ -1,7 +1,7 @@
 <template>
     <div class="container container-mw-lg">
-        <div v-for="(article, articleIndex) in articles" v-bind:key="article">
-            <article-button v-bind:articleTitle="article" v-bind:selected="false"></article-button>
+        <div class="buttons-wrapper">
+            <article-button v-for="(article, articleIndex) in articles" v-bind:key="article" v-bind:articleTitle="article" v-bind:selected="false" class="article-button"></article-button>
         </div>
     </div>
 </template>

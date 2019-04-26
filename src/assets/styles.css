@@ -207,3 +207,9 @@ html {
 .fs-15 {
   font-size: 1.5rem;
 }
+.article-button {
+  margin-bottom: 0.5em;
+}
+.buttons-wrapper:last-child {
+  margin-bottom: 0 !important;
+}
