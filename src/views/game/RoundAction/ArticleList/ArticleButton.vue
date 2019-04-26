@@ -1,5 +1,5 @@
 <template>
-    <button class="standout-card card drop-shadow w-100 ai-center">
+    <button class="card drop-shadow w-100 ai-center br-0" v-on:click="$emit('select', true)" v-bind:class="{'selected-category drop-shadow-heavy': selected}">
         <p class="card-text">{{articleTitle}}</p>
     </button>
 </template>

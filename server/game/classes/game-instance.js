@@ -66,7 +66,8 @@ module.exports =  class GameInstance {
   getActionInfo(userID) {
     return {
       end: this.startEnd[1].article,
-      articles: this.gameUsers[userID].getNextArticles()
+      articles: this.gameUsers[userID].getNextArticles(),
+      selectedArticle: this.gameUsers[userID].getLastArticle()
     }
   }
   setupNextRound() {

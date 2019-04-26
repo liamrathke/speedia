@@ -1,7 +1,9 @@
 <template>
     <div class="container container-mw-lg">
         <div class="buttons-wrapper">
-            <article-button v-for="(article, articleIndex) in articles" v-bind:key="article" v-bind:articleTitle="article" v-bind:selected="false" class="article-button"></article-button>
+            <div class="article-button" v-for="article in articles" v-bind:key="article">
+                <article-button v-bind:articleTitle="article" v-bind:selected="selectedArticle === article" v-on:select="selectedArticle = article"></article-button>
+            </div>
         </div>
     </div>
 </template>
@@ -15,6 +17,10 @@ export default {
     ArticleButton
   },
   props: {
+    selectedArticle: {
+      type: String,
+      required: true
+    },
     articles: {
       type: Array,
       required: true
