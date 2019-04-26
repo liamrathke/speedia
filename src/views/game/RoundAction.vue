@@ -2,7 +2,7 @@
     <div>
         <countdown end="TEST"></countdown>
         <article-search searchString="TEST"></article-search>
-        <article-list v-bind:selectedArticle="selectedArticle" v-bind:articles="actionInfo.articles" v-on:select="selectedArticle = $event"></article-list>
+        <article-list v-bind:selectedArticle="selectedArticle" v-bind:articles="actionInfo.articles" v-on:select="selectArticle($event)"></article-list>
     </div>
 </template>
 
@@ -21,6 +21,12 @@ export default {
   data: function() {
     return {
       selectedArticle: this.actionInfo.selectedArticle
+    }
+  },
+  methods: {
+    selectArticle(article) {
+      this.$socket.emit('selectArticle', article)
+      this.selectedArticle = article
     }
   }
 }
