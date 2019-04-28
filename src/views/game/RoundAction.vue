@@ -1,7 +1,7 @@
 <template>
     <div class="flex-column">
         <div>
-            <countdown end="TEST"></countdown>
+            <countdown v-bind:end="actionInfo.end"></countdown>
             <br>
             <div class="container container-mw-lg">
                 <article-search v-on:search="searchString = $event"></article-search>
