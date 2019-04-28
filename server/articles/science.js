@@ -1,4 +1,4 @@
 module.exports = [
   'Electron',
-  'Greenhouse Effect'
+  'J. J. Thomson'
 ]

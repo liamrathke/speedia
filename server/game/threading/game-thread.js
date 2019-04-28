@@ -28,6 +28,7 @@ async function runGame() {
     await showNextRound(5000)
     await showRoundAction(10000)
   }
+  showGameWon()
 }
 
 function showFoundGame(ms) {
@@ -57,9 +58,7 @@ function showRoundAction(ms) {
     portHelper.sendToPort(userID, 'roundAction', gameInstance.getActionInfo(userID))
   })
   return new Promise(resolve => {
-    setTimeout(() => {
-      resolve()
-    }, ms)
+    setTimeout(() => {resolve()}, ms)
   })
 }
 
@@ -67,7 +66,7 @@ function showGameWon() {
   let gameWinnerInfo = gameInstance.getGameWinner()
   if (gameWinnerInfo) {
     console.log('Game done, sending winning information!')
-    portHelper.sendToPort('all', 'gameWinner', gameWinnerInfo)
+    portHelper.sendToPort('all', 'gameWon', gameWinnerInfo)
   }
 }
 

@@ -32,5 +32,10 @@ export default new Router({
     name: 'RoundAction',
     component: () => import('@/views/game/RoundAction'),
     props: true
+  }, {
+    path: '/gameWon',
+    name: 'GameWon',
+    component: () => import('@/views/GameWon'),
+    props: true
   }]
 })
