@@ -4,7 +4,7 @@
             <small class="mr-1">Goal:</small>
             {{end}}
         </div>
-        <div class="col-3 col-md-1">10</div>
+        <div class="col-3 col-md-1">{{secondsLeft}}</div>
     </div>
 </template>
 
@@ -19,10 +19,32 @@ export default {
       required: true
     }
   },
+  computed: {
+    secondsLeft() {
+      return (this.timeLeft / 1000).toFixed(1)
+    }
+  },
   data: function() {
     return {
-      actionDuration: ROUND_INTERVALS.ROUND_ACTION_MS
+      timeLeft: ROUND_INTERVALS.ROUND_ACTION_MS,
+      tickTime: 100,
+      timer: false
     }
+  },
+  mounted: function() {
+    this.timer = setInterval(this.decreaseTimer, this.tickTime)
+  },
+  methods: {
+    decreaseTimer: function() {
+      if (this.timeLeft > 0) {
+        this.timeLeft -= this.tickTime
+      } else {
+        clearInterval(this.timer)
+      }
+    }
+  },
+  beforeDestroy() {
+    clearInterval(this.timer)
   }
 }
 </script>
