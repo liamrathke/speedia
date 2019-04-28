@@ -1,8 +1,11 @@
 <template>
     <div>
         <countdown end="TEST"></countdown>
-        <article-search searchString="TEST"></article-search>
-        <article-list v-bind:selectedArticle="selectedArticle" v-bind:articles="actionInfo.articles" v-on:select="selectArticle($event)"></article-list>
+        <div class="container container-mw-lg">
+            <article-search v-on:search="searchString = $event"></article-search>
+            <br>
+            <article-list v-bind:selectedArticle="selectedArticle" v-bind:articles="filteredArticles" v-on:select="selectArticle($event)"></article-list>
+        </div>
     </div>
 </template>
 
@@ -18,9 +21,17 @@ export default {
       required: true
     }
   },
+  computed: {
+    filteredArticles() {
+      return this.actionInfo.articles.filter(article => {
+        return article.toUpperCase().includes(this.searchString.toUpperCase())
+      })
+    }
+  },
   data: function() {
     return {
-      selectedArticle: this.actionInfo.selectedArticle
+      selectedArticle: this.actionInfo.selectedArticle,
+      searchString: ''
     }
   },
   methods: {
