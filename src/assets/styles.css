@@ -213,3 +213,17 @@ html {
 .buttons-wrapper:last-child {
   margin-bottom: 0 !important;
 }
+.game-winner {
+  color: #FFFFFF;
+}
+.game-winner > h1 {
+  font-size: 5rem;
+  margin-bottom: 0;
+}
+.game-winner > h3 {
+  font-size: 3rem;
+  margin-bottom: 0;
+}
+.game-winner > em {
+  font-size: 2.5rem;
+}

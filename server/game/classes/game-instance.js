@@ -45,8 +45,8 @@ module.exports =  class GameInstance {
         return {
           tie: false,
           disconnect: false,
-          winnerName: this.gameUsers[winnerIDs[0]].getInfo().name,
-          winnerPath: this.gameUsers[winnerIDs[0]].getPath()
+          name: this.gameUsers[winnerIDs[0]].getInfo().name,
+          path: this.gameUsers[winnerIDs[0]].getPath()
         }
       } else if (winnerIDs.length === 2) {
         return {

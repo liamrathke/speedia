@@ -1,7 +1,7 @@
 <template>
     <div class="dark-bg text-center center-parent">
         <exit-button v-bind:enabled="exitButtonEnabled" v-on:exit="exitQueue()"></exit-button>
-        <div class="center-box">
+        <div>
             <h1 class="game-text"><em>Finding Game...</em></h1>
             <div>
                 <div class="game-progress progress">
