@@ -25,12 +25,12 @@ parentPort.on('message', message => {
 // Run the game asynchronously to add delays
 async function runGame() {
   await showFoundGame(CONFIG.ROUND_INTERVALS.FOUND_GAME_MS)
-  if (true) {
-  // while (!gameInstance.isGameDone()) {
+  // if (true) {
+  while (!gameInstance.isGameDone()) {
     await showNextRound(CONFIG.ROUND_INTERVALS.NEXT_ROUND_MS)
     await showRoundAction(CONFIG.ROUND_INTERVALS.ROUND_ACTION_MS)
   }
-  // showGameWon()
+  showGameWon()
 }
 
 function showFoundGame(ms) {
