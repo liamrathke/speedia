@@ -40,7 +40,7 @@ export default {
   components: {Navbar},
   data: function() {
     return {
-      name: 'Testing',
+      name: '',
       selectedCategory: 'GrabBag',
       queueButtonEnabled: true,
       categoryInfo: Object.keys(CategoryInfo)
