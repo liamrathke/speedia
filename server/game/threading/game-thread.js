@@ -1,5 +1,7 @@
 let {parentPort, workerData} = require('worker_threads')
 
+let CONFIG = require('../../config')
+
 let GameUser = require('../classes/game-user')
 let GameInstance = require('../classes/game-instance')
 let PortHelper = require('./port-helper')
@@ -22,11 +24,11 @@ parentPort.on('message', message => {
 
 // Run the game asynchronously to add delays
 async function runGame() {
-  await showFoundGame(2000)
+  await showFoundGame(CONFIG.ROUND_INTERVALS.FOUND_GAME_MS)
   if (true) {
   // while (!gameInstance.isGameDone()) {
-    await showNextRound(5000)
-    await showRoundAction(10000)
+    await showNextRound(CONFIG.ROUND_INTERVALS.NEXT_ROUND_MS)
+    await showRoundAction(CONFIG.ROUND_INTERVALS.ROUND_ACTION_MS)
   }
   // showGameWon()
 }

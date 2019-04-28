@@ -1,20 +1,26 @@
 <template>
-    <div>
-        <countdown end="TEST"></countdown>
-        <div class="container container-mw-lg">
-            <article-search v-on:search="searchString = $event"></article-search>
+    <div class="flex-column">
+        <div>
+            <countdown end="TEST"></countdown>
             <br>
+            <div class="container container-mw-lg">
+                <article-search v-on:search="searchString = $event"></article-search>
+            </div>
+            <br>
+        </div>
+        <div class="container container-mw-lg f-1">
             <article-list v-bind:selectedArticle="selectedArticle" v-bind:articles="filteredArticles" v-on:select="selectArticle($event)"></article-list>
         </div>
+        <selected-article v-bind:selectedArticle="selectedArticle"></selected-article>
     </div>
 </template>
 
 <script>
-import {ArticleList, ArticleSearch, Countdown} from './RoundAction/index.js'
+import {ArticleList, ArticleSearch, Countdown, SelectedArticle} from './RoundAction/index.js'
 
 export default {
   name: 'RoundAction',
-  components: {ArticleList, ArticleSearch, Countdown},
+  components: {ArticleList, ArticleSearch, Countdown, SelectedArticle},
   props: {
     actionInfo: {
       type: Object,

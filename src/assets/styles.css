@@ -21,6 +21,9 @@ html {
   padding-bottom: 1em;
   background-color: var(--off-black);
 }
+.text-off-black {
+  color: var(--off-black);
+}
 .red-bg {
   background-color: #DE3F63;
 }
@@ -229,4 +232,17 @@ html {
 }
 .bl-dark {
   border-left-color: var(--off-black);
+}
+.dark-theme {
+  background-color: var(--off-black);
+  color: #FFFFFF
+}
+.flex-column {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+}
+.f-1 {
+  flex: 1;
+  overflow: auto;
 }

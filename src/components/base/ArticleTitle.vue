@@ -1,5 +1,5 @@
 <template>
-    <div class="standout-card card drop-shadow">
+    <div class="standout-card card drop-shadow dark-color">
         <div v-if="flag" class="row m-0">
             <div class="col-2 col-md-1 center-parent">
                 <h5 v-if="flag" class="card-flag">{{flag}}</h5>

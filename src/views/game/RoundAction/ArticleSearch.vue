@@ -1,6 +1,6 @@
 <template>
     <div class="input-group text-center">
-        <input type="text" class="name-enter bl-dark w-100 drop-shadow" v-model="searchString" placeholder="Search" v-on:keyup="updateSearch()">
+        <input type="text" class="name-enter bl-dark w-100 drop-shadow" v-model="searchString" placeholder="Search">
     </div>
 </template>
 
@@ -12,12 +12,14 @@ export default {
       searchString: ''
     }
   },
+  watch: {
+    searchString() {
+      this.updateSearch()
+    }
+  },
   methods: {
     updateSearch: function() {
-      let formattedString = this.searchString.trim()
-      if (formattedString.length > 0) {
-        this.$emit('search', formattedString)
-      }
+      this.$emit('search', this.searchString.trim())
     }
   }
 }

@@ -1,0 +1,7 @@
+module.exports = {
+  ROUND_INTERVALS: {
+    FOUND_GAME_MS: 3000,
+    NEXT_ROUND_MS: 5000,
+    ROUND_ACTION_MS: 10000
+  }
+}
