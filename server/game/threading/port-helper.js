@@ -10,4 +10,7 @@ module.exports = class PortHelper {
   sendToPort(target, name, data) {
     this.port.postMessage(new WorkerMessage(target, name, data).convert())
   }
+  terminateThread() {
+    this.port.postMessage('TERMINATE')
+  }
 }

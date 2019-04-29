@@ -3,7 +3,7 @@
   "ext": "js",
   "verbose": true,
   "env": {
-    "NODE_OPTIONS": "--experimental-worker"
+    "NODE_OPTIONS": ""
   },
   "exec": "node ./server/server.js"
 }

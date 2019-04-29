@@ -27,7 +27,7 @@ module.exports =  class GameInstance {
     let done = false
     let finalArticle = this.startEnd[1].article
     this.applyToEachUser(user => {
-      if (user.getLastArticle() === finalArticle) {
+      if (user.getLastArticle().toUpperCase() === finalArticle.toUpperCase()) {
         done = true
       }
     })
@@ -37,7 +37,7 @@ module.exports =  class GameInstance {
     if (this.isGameDone()) {
       let winnerIDs = []
       this.applyToEachUser(user => {
-        if (user.getLastArticle() === this.startEnd[1].article) {
+        if (user.getLastArticle().toUpperCase() === this.startEnd[1].article.toUpperCase()) {
           winnerIDs.push(user.getInfo().id)
         }
       })

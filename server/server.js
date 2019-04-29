@@ -69,7 +69,12 @@ function createNewGame(newGameUsers) {
     }
   })
   worker.on('message', message => {
-    WorkerMessage.handleMessage(message, sendMessageToUser)
+    if (message === 'TERMINATE') {
+      console.log('Game finished, terminating thread')
+      worker.terminate()
+    } else {
+      WorkerMessage.handleMessage(message, sendMessageToUser)
+    }
   })
   gameThreads[gameID] = worker
   console.log('New game created!')
