@@ -7,10 +7,9 @@ module.exports = class QueueHelper {
   getQueueLength() {
     return this.queueObject.length
   }
-  addUserToQueue(userParameters, callback) {
+  addUserToQueue(userParameters) {
     let user = new GameUser(userParameters)
     this.queueObject.push(user)
-    this.queueHandler(callback)
     return user.getCategory()
   }
   removeUserFromQueue(userID) {
@@ -18,10 +17,14 @@ module.exports = class QueueHelper {
       return user.getInfo().id !== userID
     })
   }
-  queueHandler(callback) {
-    if (this.queueObject.length > 1) {
-      let newGameUsers = this.queueObject.splice(0, 2)
-      callback(newGameUsers)
+  canCreateNewGame() {
+    return (this.queueObject.length >= 2)
+  }
+  pickNewGameUsers() {
+    if (this.canCreateNewGame()) {
+      return this.queueObject.splice(0, 2)
+    } else {
+      return false
     }
   }
 }

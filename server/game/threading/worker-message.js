@@ -13,6 +13,7 @@ module.exports = class WorkerMessage {
     }
   }
   static handleMessage(message, callback) {
+    console.log(typeof callback, callback)
     switch (message.target) {
       case 'all': {
         message.gameUserIDs.forEach(userID => {
