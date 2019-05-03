@@ -13,37 +13,36 @@ let {join} = require('path')
 let gameThreads = {}
 let userGameMap = {}
 
-let QueueInstance = require('./queue/queue-instance')
+let QueueHelper = require('./helpers/queue-helper')
+
+
 let WorkerMessage = require('./game/threading/worker-message')
 
 server.listen(8079)
 
-let queueInstance = new QueueInstance()
+let queueHelper = new QueueHelper()
 
 io.on('connection', socket => {
   console.log(`User ${socket.id} has connected`)
   socket.on('disconnect', () => {
     console.log(`User ${socket.id} has disconnected`)
-    queueInstance.removeUserFromQueue(socket.id)
+    queueHelper.removeUserFromQueue(socket.id)
     // If the user is in a game, end it
   })
   socket.on('enterQueue', userQueueParameters => {
     userQueueParameters.id = socket.id
     console.log(`Adding user ${socket.id} to queue`)
-    let userCategory = queueInstance.addUserToQueue(userQueueParameters, createNewGame)
+    let userCategory = queueHelper.addUserToQueue(userQueueParameters, createNewGame)
     io.to(socket.id).emit('enteredQueue', {category: userCategory})
   })
   socket.on('exitQueue', () => {
     console.log(`Removing user ${socket.id} from queue`)
-    queueInstance.removeUserFromQueue(socket.id)
+    queueHelper.removeUserFromQueue(socket.id)
     io.to(socket.id).emit('exitedQueue', true)
   })
   socket.on('selectArticle', article => {
     let gameID = userGameMap[socket.id]
     gameThreads[gameID].postMessage(new WorkerMessage(socket.id, 'selectArticle', article))
-  })
-  socket.on('leaveGame', () => {
-    // Triggered when the user leaves the game
   })
 })
 

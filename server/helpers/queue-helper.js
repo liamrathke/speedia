@@ -1,25 +1,20 @@
 let GameUser = require('../game/classes/game-user')
 
-module.exports = class GameQueue {
+module.exports = class QueueHelper {
   constructor() {
     this.queueObject = []
   }
   getQueueLength() {
     return this.queueObject.length
   }
-  addUserToQueue(userQueueParameters, callback) {
-    if (userQueueParameters.name && userQueueParameters.id && userQueueParameters.selectedCategory) {
-      let user = new GameUser(userQueueParameters)
-      this.queueObject.push(user)
-      this.queueHandler(callback)
-      return user.getCategory()
-    } else {
-      return false
-    }
+  addUserToQueue(userParameters, callback) {
+    let user = new GameUser(userParameters)
+    this.queueObject.push(user)
+    this.queueHandler(callback)
+    return user.getCategory()
   }
   removeUserFromQueue(userID) {
     this.queueObject = this.queueObject.filter(user => {
-      console.log(user.getInfo().id, userID, user.getInfo().id === userID)
       return user.getInfo().id !== userID
     })
   }

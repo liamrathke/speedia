@@ -3,7 +3,7 @@ let CategoryInfo = require('../support/category-info')
 module.exports = class GameUser {
   constructor(gameUser) {
     this.id = gameUser.id
-    this.name = gameUser.name
+    this.name = gameUser.name || 'Epic Gamer'
     this.gameID = false
     this.path = []
     this.nextArticles = []
