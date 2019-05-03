@@ -49,12 +49,10 @@ module.exports = class GameHelper {
     }
   }
   terminateGame(gameID) {
-    console.log(Object.keys(this.gameThreads).length, Object.keys(this.userGameMap).length)
     gameID.split('#').forEach(function(userID) {
       delete this.userGameMap[userID]
     }, this)
     this.gameThreads[gameID].terminate()
     delete this.gameThreads[gameID]
-    console.log(Object.keys(this.gameThreads).length, Object.keys(this.userGameMap).length)
   }
 }
