@@ -6,12 +6,8 @@ let io = require('socket.io')(server, {
   pingTimeout: 60000
 })
 
-
-
 let QueueHelper = require('./helpers/queue-helper')
 let GameHelper = require('./helpers/game-helper')
-
-let WorkerMessage = require('./game/threading/worker-message')
 
 server.listen(8079)
 
