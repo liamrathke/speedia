@@ -15,11 +15,11 @@ module.exports = class GameHelper {
     gameUsers.forEach(user => {this.userGameMap[user.id] = gameID})
     let worker = new Worker(this.gamePath, {workerData: {gameID, gameUsers}})
     let sendMessageToUser = this.sendMessageToUser.bind(this)
+    let terminateGame = this.terminateGame.bind(this)
     worker.on('message', function(message) {
       if (message === 'TERMINATE') {
-        worker.terminate()
+        terminateGame(gameID)
       } else {
-        console.log(typeof sendMessageToUser)
         WorkerMessage.handleMessage(message, sendMessageToUser)
       }
     })
@@ -27,16 +27,34 @@ module.exports = class GameHelper {
     console.log('New game created!')
   }
   generateGameID(gameUsers) {
-    return gameUsers.map(user => user.id).sort().join('')
+    return gameUsers.map(user => user.id).sort().join('#')
   }
   sendMessageToUser(userID, messageName, messageData) {
     this.io.to(userID).emit(messageName, messageData)
   }
   selectArticleForUser(userID, article) {
     let gameID = this.userGameMap[userID]
-    this.gameThreads[gameID].postMessage(new WorkerMessage(userID, 'selectArticle', article))
+    if (gameID) {
+      this.gameThreads[gameID].postMessage(new WorkerMessage(userID, 'selectArticle', article))
+    }
   }
-  leaveGame(userID) {
-    // Handles a user disconection, terminates game
+  disconnectUser(userID) {
+    let gameID = this.userGameMap[userID]
+    if (gameID) {
+      let otherUserID = JSON.parse(JSON.stringify(gameID)).replace(userID, '').replace('#', '')
+      this.sendMessageToUser(otherUserID, 'gameWon', {
+        disconnect: true
+      })
+      this.terminateGame(gameID)
+    }
+  }
+  terminateGame(gameID) {
+    console.log(Object.keys(this.gameThreads).length, Object.keys(this.userGameMap).length)
+    gameID.split('#').forEach(function(userID) {
+      delete this.userGameMap[userID]
+    }, this)
+    this.gameThreads[gameID].terminate()
+    delete this.gameThreads[gameID]
+    console.log(Object.keys(this.gameThreads).length, Object.keys(this.userGameMap).length)
   }
 }

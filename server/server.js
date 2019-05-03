@@ -21,7 +21,7 @@ io.on('connection', socket => {
   socket.on('disconnect', () => {
     console.log(`User ${socket.id} has disconnected`)
     queueHelper.removeUserFromQueue(socket.id)
-    // If the user is in a game, end it
+    gameHelper.disconnectUser(socket.id)
   })
   socket.on('enterQueue', userQueueParameters => {
     userQueueParameters.id = socket.id
