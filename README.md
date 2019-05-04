@@ -1,4 +1,4 @@
-# speedia
+# Speedia
 
 ## Project setup
 ```
