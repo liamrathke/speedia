@@ -9,7 +9,7 @@
             <div v-else-if="!winnerInfo.tie">
                 <div class="game-winner">
                     <h1 class="d-inline mr-2">
-                        <b>{{winnerInfo.name}}</b>
+                        <b class="drop-shadow-heavy">{{winnerInfo.name}}</b>
                     </h1>
                     <h2 class="d-inline">
                         <em>wins!</em>
