@@ -8,9 +8,9 @@ Speedia is  a real-time online Wikipedia racing web-app, built in Vue and Node. 
 
 ### Tech Stack
 
-* **VueJS** (frontend), scaffolded with **Vue-CLI**
-* **NodeJS 12.0+** with **ExpressJS** (backend)
-* **SocketIO** (backend WebSockets server), **Vue-SocketIO** (frontend WebSockets client)
+* **[VueJS](https://github.com/vuejs/vue)** (frontend), scaffolded with **[Vue-CLI](https://github.com/vuejs/vue-cli)**
+* **[NodeJS 12+](https://nodejs.org/en/download/current/)** with **[ExpressJS](https://github.com/expressjs/express)** (backend)
+* **[SocketIO](https://github.com/socketio/socket.io)** (backend WebSockets server), **[Vue-SocketIO](https://github.com/MetinSeylan/Vue-Socket.io)** (frontend WebSockets client)
 
 ### Prerequisites
 
@@ -19,10 +19,12 @@ Speedia is tested to work on these platforms:
 * **MacOS** High Sierra 10.13.6+
 * **Ubuntu Linux** 18.0.0+
 
+*If you're on a Windows environment, running Speedia through the [Ubuntu Terminal](https://tutorials.ubuntu.com/tutorial/tutorial-ubuntu-on-windows) might be possible.*
+
 Before jumping in to everything, it might be a good idea to get familiar with these tools if you aren't already:
 
-* The **Unix Shell**, which allows us to run, build, and deploy the app
-* **Yarn** (or **NPM**), the package manager for Node that helps install the app's dependencies
+* **[Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell))**, which allows us to run, build, and deploy the app
+* **[Yarn](https://yarnpkg.com/en/docs/install)** (or **[NPM](https://www.npmjs.com/get-npm)**), the package manager for Node that helps install the app's dependencies
 
 ### Installation Steps
 
@@ -34,10 +36,10 @@ Before jumping in to everything, it might be a good idea to get familiar with th
 
 ### Development
 
-Speedia uses **Nodemon**, a tool that automatically refreshes the backend whenever changes to backend code (located in the `speedia/server` directory) are detected. Running `yarn frontend` triggers a development server for the frontend, which will automatically refresh the frontend on file changes as well.
+Speedia uses **[Nodemon](https://github.com/remy/nodemon)**, a tool that automatically refreshes the backend whenever changes to backend code (located in the `speedia/server` directory) are detected. Running `yarn frontend` triggers a development server for the frontend, which will automatically refresh the frontend on file changes as well.
 
 ### Troubleshooting
 
 If you're running into errors during installation, here are some things to watch out for:
 
-* Speedia uses **Worker Threads** to handle individual games, which is only available out-of-the box in **NodeJS 12.0.0** or greater; make sure that this version is installed on your system
+* Speedia uses **[Worker Threads](https://nodejs.org/api/worker_threads.html)** to handle individual games, which is only available out-of-the box in **[NodeJS 12+](https://nodejs.org/en/download/current/)**; make sure that this version is installed on your system
