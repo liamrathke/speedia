@@ -27,9 +27,7 @@
                 <article-title flag="START" v-bind:text="startEnd[0].article"></article-title>
                 <div class="row m-0">
                     <span class="col-10 col-md-9 offset-2 offset-md-1">
-                        <i class="pointer-arrow fa fa-angle-double-down"></i>
-                        <i class="pointer-arrow fa fa-angle-double-down"></i>
-                        <i class="pointer-arrow fa fa-angle-double-down"></i>
+                        <i class="pointer-arrow fa fa-angle-double-down drop-shadow" v-for="n in 3" v-bind:key="n"></i>
                     </span>
                 </div>
                 <article-title flag="END" v-bind:text="startEnd[1].article"></article-title>
