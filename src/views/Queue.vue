@@ -8,7 +8,7 @@
                     <div class="game-progress-bar progress-bar progress-bar-striped progress-bar-animated" role="progressbar"></div>
                 </div>
                 <div class="drop-shadow b-0 br-0">
-                    <category-card v-bind:category-alias="category"></category-card>
+                    <category-card v-bind:drop-shadow="true" v-bind:category-alias="category"></category-card>
                 </div>
             </div>
         </div>

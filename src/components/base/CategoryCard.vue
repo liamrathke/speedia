@@ -1,6 +1,6 @@
 <template>
     <div class="card drop-shadow b-0 br-0 unselected-category" v-bind:class="{'selected-category': selected}">
-        <ul class="list-group list-group-flush text-center">
+        <ul class="list-group list-group-flush text-center" v-bind:class="{'drop-shadow': dropShadow}">
             <li class="list-group-item bg-t"><i class="fa fs-5 mt-3" v-bind:class="categoryInfo.icon"></i></li>
             <li class="list-group-item pt-0 bg-t">
                 <h4 class="category-name">{{categoryInfo.name}}</h4>
@@ -15,6 +15,10 @@ import CategoryInfo from '#/game/support/category-info.js'
 export default {
   props: {
     selected: {
+      type: Boolean,
+      required: false
+    },
+    dropShadow: {
       type: Boolean,
       required: false
     },

@@ -9,9 +9,9 @@
             <br>
         </div>
         <div class="container container-mw-lg f-1">
-            <article-list v-bind:selectedArticle="selectedArticle" v-bind:articles="filteredArticles" v-on:select="selectArticle($event)"></article-list>
+            <article-list v-bind:selected-article="selectedArticle" v-bind:articles="filteredArticles" v-on:select="selectArticle($event)"></article-list>
         </div>
-        <selected-article v-bind:selectedArticle="selectedArticle"></selected-article>
+        <selected-article v-bind:selected-article="selectedArticle"></selected-article>
     </div>
 </template>
 
