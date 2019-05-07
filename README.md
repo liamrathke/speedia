@@ -1,4 +1,4 @@
-# Speedia
+![Speedia](https://user-images.githubusercontent.com/33555592/57264828-3c19ff80-7042-11e9-9f50-c99451c4a556.png)
 
 Speedia is  a real-time online Wikipedia racing web-app, built in Vue and Node. Select a category, face  your opponent, and make your way to the final article in fewer articles than your opponent. 
 
