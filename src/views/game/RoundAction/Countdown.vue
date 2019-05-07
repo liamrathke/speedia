@@ -3,9 +3,9 @@
         <div class="card-text dark-theme m-0 row py-2">
             <div class="col-9 col-md-11 text-left">
                 <small class="mr-1">Goal:</small>
-                {{end}}
+                <span class="drop-shadow-heavy">{{end}}</span>
             </div>
-            <div class="col-3 col-md-1">{{secondsLeft}}</div>
+            <div class="col-3 col-md-1 drop-shadow-heavy">{{secondsLeft}}</div>
         </div>
         <div class="red-bg h-1" v-bind:style="{width: percentLeft}"></div>
     </div>
