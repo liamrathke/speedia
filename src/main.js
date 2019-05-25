@@ -7,7 +7,7 @@ import VueSocketIO from 'vue-socket.io'
 
 Vue.use(new VueSocketIO({
   debug: true,
-  connection: 'http://' + window.location.hostname + ':8079',
+  connection: process.env.VUE_APP_BACKEND,
   vuex: {
     store,
     actionPrefix: 'SOCKET_',
