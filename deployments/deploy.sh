@@ -1,2 +1,2 @@
 #!/bin/bash
-echo Deploying!
+echo Running Deploy Script
