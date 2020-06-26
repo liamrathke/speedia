@@ -16,8 +16,8 @@ Speedia is  a real-time online Wikipedia racing web-app, built in Vue and Node. 
 
 Speedia is tested to work on these platforms:
 
-* **MacOS** High Sierra 10.13.6+
-* **Ubuntu Linux** 19.0.0+
+* **MacOS** High Sierra 10.13.6+ (x86-64)
+* **Ubuntu Linux** 19.0.0+ (x86-64)
 
 *If you're on a Windows environment, running Speedia through the [Ubuntu Terminal](https://tutorials.ubuntu.com/tutorial/tutorial-ubuntu-on-windows) might be possible.*
 
